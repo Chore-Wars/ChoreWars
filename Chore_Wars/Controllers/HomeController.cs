@@ -20,6 +20,7 @@ namespace Chore_Wars.Controllers
 
         public IActionResult Index()
         {
+            string yoyo = "";
             return View();
         }
 
