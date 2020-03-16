@@ -20,7 +20,8 @@ namespace Chore_Wars.Controllers
 
         public IActionResult Index()
         {
-            String Hello = "Sean!";
+            string kyle = "hello!";
+
             return View();
         }
 
