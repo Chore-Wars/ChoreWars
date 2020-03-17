@@ -9,19 +9,19 @@
 <p>Difficulty: @Model.results[0].difficulty</p>
 <p>Point Value: @Model.results[0].point_value</p>
 <p>Category: @Model.results[0].category</p><br />
-<p>@Model.results[0].question</p>
+<p>@Html.Raw(Model.results[0].question)</p>
 
 <form action="../Question/Result" method="post">
-    <label for="1">@Model.results[0].all_answers[0]</label>
+    <label for="1">@Html.Raw(Model.results[0].all_answers[0])</label>
     <input id="1" type="radio" name="selection" value="@Model.results[0].all_answers[0]" /><br />
 
-    <label for="2">@Model.results[0].all_answers[1]</label>
+    <label for="2">@Html.Raw(Model.results[0].all_answers[1])</label>
     <input id="2" type="radio" name="selection" value="@Model.results[0].all_answers[1]" /><br />
 
-    <label for="3">@Model.results[0].all_answers[2]</label>
+    <label for="3">@Html.Raw(Model.results[0].all_answers[2])</label>
     <input type="radio" name="selection" value="@Model.results[0].all_answers[2]" /><br />
 
-    <label for="4">@Model.results[0].all_answers[3]</label>
+    <label for="4">@Html.Raw(Model.results[0].all_answers[3])</label>
     <input id="4" type="radio" name="selection" value="@Model.results[0].all_answers[3]" /><br />
 
     <input type="hidden" name="answer" value="@Model.results[0].correct_answer" />
