@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "ViewChores";
+}
+
+@model List<Chore>
+
+<h1>Assigned Chores</h1>
+
+<table class="table">
+    <tr>
+        <th>Player</th>
+        <th>Chore Name</th>
+        <th>Description</th>
+        <th>Point Value</th>
+        <th>Due Date</th>
+    </tr>
+    @foreach (Chore chore in Model)
+    {
+        <tr>
+            <td>@chore.ChoreDescription</td>
+            <td>@chore.DueDate</td>
+        </tr>
+    }
+
+</table>

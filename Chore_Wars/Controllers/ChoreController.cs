@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Chore_Wars.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Chore_Wars.Controllers
 {
@@ -24,16 +25,21 @@ namespace Chore_Wars.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddChore(Chore newChore)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Chore.Add(newChore);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+        //public IActionResult AddChore(Chore newChore)
+        //{
+        //    newChore.ChoreId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    //newChore.ChoreId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        //    //newChore.ChoreId = 1;
+
+        //    //if (ModelState.IsValid)
+        //    //{
+        //    _context.Chore.Add(newChore);
+        //    _context.SaveChanges();
+        //    return RedirectToAction("Index");
+        //    //}
+        //    return View();
+        //}
+       
 
         //Delete Chore Method
         public IActionResult DeleteChore(int id)
@@ -50,8 +56,6 @@ namespace Chore_Wars.Controllers
         }
 
         //Edit chore method
-
-
         public IActionResult EditChore(int id)
         {
             Chore found = _context.Chore.Find(id);
@@ -67,16 +71,21 @@ namespace Chore_Wars.Controllers
         }
 
 
+        public IActionResult ViewChores()
+        {
+            string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<Chore> thisHousholdsChores = _context.Chore.Where(x => x.ChoreId.ToString() == id).ToList();
+
+            return View(thisHousholdsChores);
+        }
+
+
         public IActionResult BuyChoresFor(int userid)
         {
             return View();
         }
 
 
-        public IActionResult ViewAssignedChores(int userid)
-        {
-            return View();
-        }
 
 
 
