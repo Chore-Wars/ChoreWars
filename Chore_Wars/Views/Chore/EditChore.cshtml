@@ -3,19 +3,19 @@
     ViewData["Title"] = "EditChore";
 }
 
+
 @model Chore
 <h1>Edit Chore</h1>
 
 <form action="../Chore/EditChore" method="post">
 
-    <input type="hidden" name="ChoreId" value="ChoreId" /><br />
+    @*<input type="hidden" name="ChoreId" value="ChoreId" />*@<br />
 
-    <input type="text" name="UserId" placeholder="@Model.UserId"/><br />
-    Name: <input type="text" name="ChoreName" placeholder="@Model.ChoreName"/><br />
-    Description: <input type="text" name="ChoreDescription" placeholder="@Model.ChoreDescription"/><br />
-    Point Value: <input type="text" name="PointValue" placeholder="@Model.PointValue"/><br />
-    Due Date: <input type="date" name="DueDate" placeholder="@Model.PointValue"/><br />
-    <input type="submit"  value="Save Changes" /><br />
+    <input type="text" name="UserId" placeholder="@Model.UserId" /><br />
+    Name: <input type="text" name="ChoreName" placeholder="@Model.ChoreName" /><br />
+    Description: <input type="text" name="ChoreDescription" placeholder="@Model.ChoreDescription" /><br />
+    Point Value: <input type="text" name="PointValue" placeholder="@Model.PointValue" /><br />
+    Due Date: <input type="date" name="DueDate" placeholder="@Model.PointValue" /><br />
+    <input type="submit" value="Save Changes" /><br />
 
 </form>
-

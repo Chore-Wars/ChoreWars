@@ -37,9 +37,9 @@ namespace Chore_Wars.Controllers
         //    _context.SaveChanges();
         //    return RedirectToAction("Index");
         //    //}
-        //    return View();
+        //    return RedirectToAction("ViewChores");
         //}
-       
+
 
         //Delete Chore Method
         public IActionResult DeleteChore(int id)
@@ -52,7 +52,7 @@ namespace Chore_Wars.Controllers
 
                 return RedirectToAction("Index");
             }
-            return View();
+            return RedirectToAction("ViewChores");
         }
 
         //Edit chore method
@@ -67,7 +67,8 @@ namespace Chore_Wars.Controllers
                 _context.Update(found);
                 _context.SaveChanges();
             }
-            return View(found.ChoreId);
+            //return RedirectToAction("ViewChores");
+            return View();
         }
 
 
