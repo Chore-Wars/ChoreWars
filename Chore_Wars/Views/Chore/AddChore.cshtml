@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "AddChore";
+}
+
+<h1>Add Chore</h1>
+
+<form action="../Chore/AddChore" method="post">
+
+    <input type="hidden" name="ChoreId" value="ChoreId" />
+    <input type="text" name="ChoreDescripton" placeholder="Description" />
+    Point Value: <input type="number" min="1" max="10" name="PointValue" required />
+    Due Date: <input type="date" name="DueDate" required />
+    
+    
+       </form>

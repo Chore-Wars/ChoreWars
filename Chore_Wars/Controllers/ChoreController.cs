@@ -15,6 +15,7 @@ namespace Chore_Wars.Controllers
         {
             _context = context;
         }
+
         //add chores to database
         [HttpGet]
         public IActionResult AddChore()
@@ -27,12 +28,14 @@ namespace Chore_Wars.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Tasks.Add(newChore);
+                _context.Chore.Add(newChore);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
         }
+
+        //
         public IActionResult BuyChoresFor(int userid)
         {
             return View();
