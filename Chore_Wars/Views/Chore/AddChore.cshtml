@@ -7,10 +7,12 @@
 
 <form action="../Chore/AddChore" method="post">
 
+    @*not sure about the chore id*@
     <input type="hidden" name="ChoreId" value="ChoreId" />
+
     <input type="text" name="ChoreDescripton" placeholder="Description" />
     Point Value: <input type="number" min="1" max="10" name="PointValue" required />
     Due Date: <input type="date" name="DueDate" required />
+    <input type="submit"  value="Add Chore!" />
     
-    
-       </form>
+</form>
