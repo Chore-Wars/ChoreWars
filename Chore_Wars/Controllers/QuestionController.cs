@@ -10,6 +10,27 @@ namespace Chore_Wars.Controllers
 {
     public class QuestionController : Controller
     {
+        private readonly ChoreWarsDbContext _context;
+
+        public QuestionController(ChoreWarsDbContext context)
+        {
+            _context = context;
+        }
+
+        //TESTING
+        private List<Player> houseHoldPlayers = new List<Player>();
+
+        public IActionResult SessionTest()
+        {
+            return View(houseHoldPlayers);
+        }
+        //^TESTING^
+
+        public void PopulateFromSession()
+        {
+
+        }
+
         [HttpGet]
         public IActionResult SelectQuestion()
         {
@@ -60,17 +81,23 @@ namespace Chore_Wars.Controllers
         public IActionResult Result(string selection, string answer, int points)
         {
             string outcome;
+            Player foundPlayer = _context.Player.Find();
 
             //evaluates Player selection. Awards points if correct, and increments WrongAnswer if incorrect
-            if(selection == answer)
+            if (selection == answer)
             {
                 //add logic to add points to DB, based on current Player
+                //foundPlayer.CurrentPoints += points;
+                //foundPlayer.TotalPoints += points;
+                
                 outcome = ($"Correct! you earned {points} points!");
                 return View("Result", outcome);
             }
             else
             {
                 //add logic to increment 'WrongAnswer' in Player db table, based on current Player
+                //foundPlayer.IncorrectAnswers += 1;
+                
                 outcome = "Incorrect :(";
                 return View("Result", outcome);
             }

@@ -34,7 +34,16 @@ namespace Chore_Wars
                     .AddDbContext<ChoreWarsDbContext>
                         (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-
+            //session support
+            services.AddDistributedMemoryCache();
+            services.AddSession(
+                options =>
+                {
+                    options.IdleTimeout = TimeSpan.FromMinutes(20);
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.IsEssential = true;
+                }
+                );
 
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -59,7 +68,8 @@ namespace Chore_Wars
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            //enable sessions
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();
