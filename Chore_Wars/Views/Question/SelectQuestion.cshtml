@@ -1,11 +1,13 @@
 ﻿
 @{
     ViewData["Title"] = "SelectQuestion";
-}
+
 
 <h1>SelectQuestion</h1>
 
+@model Player
 
+    <p>Hello @Model.FirstName</p>
 
 <form action="../Question/SelectQuestion" method="post">
     <input type="submit" name="difficulty" value="easy" />
@@ -13,3 +15,4 @@
     <input type="submit" name="difficulty" value="hard" />
 </form>
 
+    }

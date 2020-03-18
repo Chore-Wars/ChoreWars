@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "ViewPlayers";
+}
+
+
+<h1>ViewPlayers</h1>
+
+@model List<Player>
+
+@foreach (var player in Model)
+{
+    <p>@player.FirstName </p>
+    <p>@player.LastName</p>
+    <p><a href="../Household/LoginPlayer">Log in as this user</a></p>
+}

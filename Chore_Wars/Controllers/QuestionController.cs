@@ -39,7 +39,6 @@ namespace Chore_Wars.Controllers
         //public void PopulateFromSession()
         //{
         //    string playerListJson = HttpContext.Session.GetString("Players");
-        //    if (playerListJson != null)
         //    {
         //        houseHoldPlayers = JsonConvert.DeserializeObject<List<Player>>(playerListJson);
         //    }
@@ -60,32 +59,32 @@ namespace Chore_Wars.Controllers
             //to represent the 'logged in' Player
 
         //Test action/view to contain
-        public IActionResult TestIndex()
-        {
-            PopulateFromSession();
-            return View(allPlayers);
-        }
+        //public IActionResult TestIndex()
+        //{
+        //    PopulateFromSession();
+        //    return View(allPlayers);
+        //}
 
-        //Test action to save session data
-        //in this case: 
-        private List<Player> allPlayers = new List<Player>();
-        //1) Creating a new Player (from information provided by the view)
-        //2) Adding that Player to our 'dummy' List
-        //3) Setting the new Session string equal to the new List (SetString), which just received a new Player
-        //4) Sending back to TestIndex view, where list is displayed
-        public IActionResult SavePlayer(Player newPlayer)
-        {
-            //calling PopulateFromSession here in order to store multiple items at once.
-            //likely won't have to do that in a 'live' environment - only one Player will ever be 'logged in' at once     
-            PopulateFromSession();
-            allPlayers.Add(newPlayer);
+        ////Test action to save session data
+        ////in this case: 
+        //private List<Player> allPlayers = new List<Player>();
+        ////1) Creating a new Player (from information provided by the view)
+        ////2) Adding that Player to our 'dummy' List
+        ////3) Setting the new Session string equal to the new List (SetString), which just received a new Player
+        ////4) Sending back to TestIndex view, where list is displayed
+        //public IActionResult SavePlayer(Player newPlayer)
+        //{
+        //    //calling PopulateFromSession here in order to store multiple items at once.
+        //    //likely won't have to do that in a 'live' environment - only one Player will ever be 'logged in' at once     
+        //    PopulateFromSession();
+        //    allPlayers.Add(newPlayer);
 
-            //So... here, we're... Basically sessions have 2 'modes' - .SetString, and .SetInt32
-            //JsonConvert.SerializeObject converts the object (allPlayers) into JSON(string) format
-             //so... take this session called "AllPlayerSession", and set it to the new JSON-ified allPlayers list object
-            HttpContext.Session.SetString("AllPlayerSession", JsonConvert.SerializeObject(allPlayers));
-            return RedirectToAction("TestIndex");
-        }
+        //    //So... here, we're... Basically sessions have 2 'modes' - .SetString, and .SetInt32
+        //    //JsonConvert.SerializeObject converts the object (allPlayers) into JSON(string) format
+        //     //so... take this session called "AllPlayerSession", and set it to the new JSON-ified allPlayers list object
+        //    HttpContext.Session.SetString("AllPlayerSession", JsonConvert.SerializeObject(allPlayers));
+        //    return RedirectToAction("TestIndex");
+        //}
 
         public IActionResult ClearPlayers()
         {
@@ -94,20 +93,22 @@ namespace Chore_Wars.Controllers
             return RedirectToAction("TestIndex");
         }
 
-        public void PopulateFromSession()
-        {
-            //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
-            //and re-instantiate(?) it as an object of type List<Player>
-            //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
-            string playerListJson = HttpContext.Session.GetString("AllPlayerSession");
-            if(playerListJson != null)
-            {
-                allPlayers = JsonConvert.DeserializeObject<List<Player>>(playerListJson);
-            }
-        }
-        //^TESTING^
 
-        
+
+        //public void PopulateFromSession()
+        //{
+        //    //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
+        //    //and re-instantiate(?) it as an object of type List<Player>
+        //    //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
+        //    string playerListJson = HttpContext.Session.GetString("AllPlayerSession");
+        //    if(playerListJson != null)
+        //    {
+        //        allPlayers = JsonConvert.DeserializeObject<List<Player>>(playerListJson);
+        //    }
+        //}
+        ////^TESTING^
+
+      
 
         [HttpGet]
         public IActionResult SelectQuestion()
@@ -116,11 +117,12 @@ namespace Chore_Wars.Controllers
         }
 
         [HttpPost]
-        public IActionResult SelectQuestion(string difficulty)
-        {
-            TempData["difficulty"] = difficulty;
-            return RedirectToAction("GetQuestion", "Question");
-        }
+        //public IActionResult SelectQuestion(string difficulty)
+        //{
+        //    PopulateFromSession();
+        //    TempData["difficulty"] = difficulty;
+        //    return RedirectToAction("GetQuestion", "Question");
+        //}
 
 
 
@@ -159,7 +161,8 @@ namespace Chore_Wars.Controllers
         public IActionResult Result(string selection, string answer, int points)
         {
             string outcome;
-            Player foundPlayer = _context.Player.Find();
+
+         //   Player foundPlayer = _context.Player.Find();
 
             //evaluates Player selection. Awards points if correct, and increments WrongAnswer if incorrect
             if (selection == answer)
