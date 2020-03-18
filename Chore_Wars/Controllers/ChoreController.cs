@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Chore_Wars.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
 namespace Chore_Wars.Controllers
 {
     public class ChoreController : Controller
     {
-        List<Chore> thisHousholdsChores = new List<Chore> { };
+        
 
         private readonly ChoreWarsDbContext _context;
         public ChoreController(ChoreWarsDbContext context)
@@ -39,7 +35,7 @@ namespace Chore_Wars.Controllers
                 _context.Chore.Add(newChore);
                 _context.SaveChanges();
             }
-                return RedirectToAction("ViewChores", newChore);
+                return RedirectToAction("ViewChores");
         }
 
 
@@ -55,21 +51,34 @@ namespace Chore_Wars.Controllers
             return RedirectToAction("ViewChores");
         }
 
-        //Edit chore method
-        //public IActionResult EditChore(int id)
-        //{
-        //    Chore found = _context.Chore.Find(id);
-        //    if (found != null)
-        //    {
 
-        //        //modify the state of this entry in the database
-        //        _context.Entry(found).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-        //        _context.Update(found);
-        //        _context.SaveChanges();
-        //    }
-        //    //return RedirectToAction("ViewChores");
-        //    return View();
-        //}
+        //Edit chore method
+        public IActionResult EditChore(int id)
+        {
+            Chore found = _context.Chore.Find(id);
+            if (found != null)
+            {
+                return View(found);
+            }
+            return RedirectToAction("ViewChores");
+        }
+
+        [HttpPost]
+        public IActionResult EditChore(Chore editedChore)
+        {
+            Chore dbChore = _context.Chore.Find(editedChore.ChoreId);
+            if (ModelState.IsValid)
+            {
+                dbChore.PointValue = editedChore.PointValue;
+                dbChore.ChoreName = editedChore.ChoreName;
+                dbChore.ChoreDescription = editedChore.ChoreDescription;
+
+                _context.Entry(dbChore).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _context.Update(dbChore);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ViewChores");
+        }
 
 
 
@@ -77,10 +86,16 @@ namespace Chore_Wars.Controllers
 
         //assign chores to player. subtract points
 
-        //public IActionResult BuyChoresFor(int userid)
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult AssignChore(int id)
+        {
+            Chore found = _context.Chore.Find(id);
+
+           
+                return View(found);
+            
+
+        }
 
 
 

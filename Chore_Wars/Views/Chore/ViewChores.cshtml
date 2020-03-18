@@ -18,13 +18,22 @@
     @foreach (Chore chore in Model)
     {
 <tr>
-    <td>@chore.UserId</td>
+    @if (chore.UserId == null)
+    {
+        <td><a href="../Chore/AssignChore?id=@chore.ChoreId" class="btn-warning">Assign Chore </a></td>
+    }
 
+    else
+    {
+    <td>@chore.UserId</td>
+    }
+    
     <td>@chore.ChoreName</td>
     <td>@chore.ChoreDescription</td>
     <td>@chore.PointValue</td>
     <td>@chore.DueDate</td>
     <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
+    <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
 
 </tr>
     }
