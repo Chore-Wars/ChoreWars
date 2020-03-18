@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Chore_Wars.Controllers
 {
-    public class HouseholdController : Controller
+    public class HouseHoldController : Controller
     {
         public IActionResult Index()
         {
@@ -44,3 +44,7 @@ namespace Chore_Wars.Controllers
         }
     }
 }
+//LoginHousehold() <- Identity(mostly)
+//RegisterHouseHold() <- Enter household name(‘The Cooper Family’)
+//ViewHouseHoldMembers()
+//ViewHouseHoldChores()
