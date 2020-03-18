@@ -44,3 +44,7 @@ namespace Chore_Wars.Controllers
         }  
     }
 }
+//LoginHousehold() <- Identity(mostly)
+//RegisterHouseHold() <- Enter household name(‘The Cooper Family’)
+//ViewHouseHoldMembers()
+//ViewHouseHoldChores()
