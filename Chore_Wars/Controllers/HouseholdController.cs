@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Chore_Wars.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Chore_Wars.Controllers
 {
     public class HouseHoldController : Controller
     {
+        private readonly ChoreWarsDbContext _context;
+        public HouseHoldController(ChoreWarsDbContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
             return View();
@@ -35,6 +43,9 @@ namespace Chore_Wars.Controllers
         }
         public IActionResult LoginPlayer()
         {
+            HttpContext.Session.SetString("PlayerSession", JsonConvert.SerializeObject(sessionPlayer));
+
+
             return RedirectToAction("SelectQuestion", "Question");
         }
 
@@ -42,8 +53,47 @@ namespace Chore_Wars.Controllers
         {
             return View();
         }
+        public IActionResult ViewPlayers()
+        {
+          //  var players = _context.Player.Where(x => x.HouseholdId == null);
+
+            var players = _context.Player.Where(x => x.UserId != null).ToList();
+            return View(players);
+        }
+
+        [HttpGet]
+        public IActionResult AddNewPlayer()
+        {
+            return View();
+        }
+       
+        [HttpPost]
+
+        public IActionResult AddNewPlayer(Player newPlayer)
+        {
+            _context.Player.Add(newPlayer);
+            _context.SaveChanges();
+            return RedirectToAction();
+        }
+        
+      //  public IActionResult StoreSessionPlayer 
+        //dummy player for testing Sessions
+        Player sessionPlayer = new Player();
+        public void PopulateFromSession()
+        {
+            //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
+            //and re-instantiate(?) it as an object of type List<Player>
+            //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
+            string playerListJson = HttpContext.Session.GetString("PlayerSession");
+            if (playerListJson != null)
+            {
+                sessionPlayer = JsonConvert.DeserializeObject<Player>(playerListJson);
+            }
+        }
+
     }
 }
+
 //LoginHousehold() <- Identity(mostly)
 //RegisterHouseHold() <- Enter household name(‘The Cooper Family’)
 //ViewHouseHoldMembers()
