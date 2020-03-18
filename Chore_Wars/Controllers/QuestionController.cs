@@ -58,7 +58,6 @@ namespace Chore_Wars.Controllers
         //need to set up a 'dummy' list or object in order to contain the data we'll store 
         //in our case, we probably only need to store a single Player at a time
             //to represent the 'logged in' Player
-        private List<Player> allPlayers = new List<Player>();
 
         //Test action/view to contain
         public IActionResult TestIndex()
@@ -69,6 +68,7 @@ namespace Chore_Wars.Controllers
 
         //Test action to save session data
         //in this case: 
+        private List<Player> allPlayers = new List<Player>();
         //1) Creating a new Player (from information provided by the view)
         //2) Adding that Player to our 'dummy' List
         //3) Setting the new Session string equal to the new List (SetString), which just received a new Player

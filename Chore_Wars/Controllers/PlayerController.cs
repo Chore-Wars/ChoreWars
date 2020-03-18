@@ -27,6 +27,8 @@ namespace Chore_Wars.Controllers
         {
             if (ModelState.IsValid)
             {
+                //check which IDENTITY user is logged in.
+                //do... newPlayer.HouseholdId = (identity stuff)
                 _context.Player.Add(newPlayer);
                 _context.SaveChanges();
             }
