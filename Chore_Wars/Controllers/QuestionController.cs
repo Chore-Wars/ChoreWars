@@ -55,32 +55,50 @@ namespace Chore_Wars.Controllers
             _context.SaveChanges();
         }
 
+        //need to set up a 'dummy' list or object in order to contain the data we'll store 
+        //in our case, we probably only need to store a single Player at a time
+            //to represent the 'logged in' Player
         private List<Player> allPlayers = new List<Player>();
 
+        //Test action/view to contain
         public IActionResult TestIndex()
         {
             PopulateFromSession();
             return View(allPlayers);
         }
 
+        //Test action to save session data
+        //in this case: 
+        //1) Creating a new Player (from information provided by the view)
+        //2) Adding that Player to our 'dummy' List
+        //3) Setting the new Session string equal to the new List (SetString), which just received a new Player
+        //4) Sending back to TestIndex view, where list is displayed
         public IActionResult SavePlayer(Player newPlayer)
         {
+            //calling PopulateFromSession here in order to store multiple items at once.
+            //likely won't have to do that in a 'live' environment - only one Player will ever be 'logged in' at once     
             PopulateFromSession();
             allPlayers.Add(newPlayer);
 
+            //So... here, we're... Basically sessions have 2 'modes' - .SetString, and .SetInt32
+            //JsonConvert.SerializeObject converts the object (allPlayers) into JSON(string) format
+             //so... take this session called "AllPlayerSession", and set it to the new JSON-ified allPlayers list object
             HttpContext.Session.SetString("AllPlayerSession", JsonConvert.SerializeObject(allPlayers));
-            //HttpContext.Session.SetString("User", userName);
             return RedirectToAction("TestIndex");
         }
 
         public IActionResult ClearPlayers()
         {
+            //clears the current session named "AllPlayerSession"
             HttpContext.Session.Remove("AllPlayerSession");
             return RedirectToAction("TestIndex");
         }
 
         public void PopulateFromSession()
         {
+            //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
+            //and re-instantiate(?) it as an object of type List<Player>
+            //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
             string playerListJson = HttpContext.Session.GetString("AllPlayerSession");
             if(playerListJson != null)
             {
