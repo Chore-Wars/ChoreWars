@@ -10,6 +10,7 @@ namespace Chore_Wars.Controllers
 {
     public class ChoreController : Controller
     {
+        List<Chore> thisHousholdsChores = new List<Chore> { };
 
         private readonly ChoreWarsDbContext _context;
         public ChoreController(ChoreWarsDbContext context)
@@ -17,7 +18,13 @@ namespace Chore_Wars.Controllers
             _context = context;
         }
 
-        //add chores to database
+        //display chores in table
+        public IActionResult ViewChores()
+        {
+            return View(_context.Chore.ToList());
+        }
+
+        //add chores to database    
         [HttpGet]
         public IActionResult AddChore()
         {
@@ -25,20 +32,15 @@ namespace Chore_Wars.Controllers
         }
 
         [HttpPost]
-        //public IActionResult AddChore(Chore newChore)
-        //{
-        //    newChore.ChoreId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    //newChore.ChoreId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-        //    //newChore.ChoreId = 1;
-
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    _context.Chore.Add(newChore);
-        //    _context.SaveChanges();
-        //    return RedirectToAction("Index");
-        //    //}
-        //    return RedirectToAction("ViewChores");
-        //}
+        public IActionResult AddChore(Chore newChore)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Chore.Add(newChore);
+                _context.SaveChanges();
+            }
+                return RedirectToAction("ViewChores", newChore);
+        }
 
 
         //Delete Chore Method
@@ -49,42 +51,36 @@ namespace Chore_Wars.Controllers
             {
                 _context.Chore.Remove(Found);
                 _context.SaveChanges();
-
-                return RedirectToAction("Index");
             }
             return RedirectToAction("ViewChores");
         }
 
         //Edit chore method
-        public IActionResult EditChore(int id)
-        {
-            Chore found = _context.Chore.Find(id);
-            if (found != null)
-            {
-                
-                //modify the state of this entry in the database
-                _context.Entry(found).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                _context.Update(found);
-                _context.SaveChanges();
-            }
-            //return RedirectToAction("ViewChores");
-            return View();
-        }
+        //public IActionResult EditChore(int id)
+        //{
+        //    Chore found = _context.Chore.Find(id);
+        //    if (found != null)
+        //    {
+
+        //        //modify the state of this entry in the database
+        //        _context.Entry(found).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        //        _context.Update(found);
+        //        _context.SaveChanges();
+        //    }
+        //    //return RedirectToAction("ViewChores");
+        //    return View();
+        //}
 
 
-        public IActionResult ViewChores()
-        {
-            string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            List<Chore> thisHousholdsChores = _context.Chore.Where(x => x.ChoreId.ToString() == id).ToList();
-
-            return View(thisHousholdsChores);
-        }
 
 
-        public IActionResult BuyChoresFor(int userid)
-        {
-            return View();
-        }
+
+        //assign chores to player. subtract points
+
+        //public IActionResult BuyChoresFor(int userid)
+        //{
+        //    return View();
+        //}
 
 
 
