@@ -12,9 +12,12 @@ namespace Chore_Wars.Controllers
     public class HouseHoldController : Controller
     {
         private readonly ChoreWarsDbContext _context;
-        public HouseHoldController(ChoreWarsDbContext context)
+        private readonly Helper _helper;
+        private readonly IHttpContextAccessor _contextAccessor;
+        public HouseHoldController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
+            _contextAccessor = contextAccessor;
         }
         public IActionResult Index()
         {
@@ -41,10 +44,13 @@ namespace Chore_Wars.Controllers
             //return redirect to action-
             return View();
         }
+
+        public Player sessionPlayer = new Player();
         public IActionResult LoginPlayer()
         {
+            //get user from database
+            sessionPlayer.FirstName = "bobson";
             HttpContext.Session.SetString("PlayerSession", JsonConvert.SerializeObject(sessionPlayer));
-
 
             return RedirectToAction("SelectQuestion", "Question");
         }
@@ -56,8 +62,7 @@ namespace Chore_Wars.Controllers
         public IActionResult ViewPlayers()
         {
           //  var players = _context.Player.Where(x => x.HouseholdId == null);
-
-            var players = _context.Player.Where(x => x.UserId != null).ToList();
+            var players = _context.Player.Where(x => x.UserId != null).ToList();           
             return View(players);
         }
 
@@ -76,20 +81,19 @@ namespace Chore_Wars.Controllers
             return RedirectToAction();
         }
         
-      //  public IActionResult StoreSessionPlayer 
+        //public IActionResult StoreSessionPlayer 
         //dummy player for testing Sessions
-      public Player sessionPlayer = new Player();
-        public void PopulateFromSession()
-        {
-            //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
-            //and re-instantiate(?) it as an object of type List<Player>
-            //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
-            string playerJson = HttpContext.Session.GetString("PlayerSession");
-            if (playerJson != null)
-            {
-                sessionPlayer = JsonConvert.DeserializeObject<Player>(playerJson);
-            }
-        }
+        //public void PopulateFromSession()
+        //{
+        //    //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
+        //    //and re-instantiate(?) it as an object of type List<Player>
+        //    //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
+        //    string playerJson = HttpContext.Session.GetString("PlayerSession");
+        //    if (playerJson != null)
+        //    {
+        //        sessionPlayer = JsonConvert.DeserializeObject<Player>(playerJson);
+        //    }
+        //}
 
     }
 }

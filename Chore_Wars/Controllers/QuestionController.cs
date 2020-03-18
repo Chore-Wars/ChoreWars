@@ -14,12 +14,16 @@ namespace Chore_Wars.Controllers
     {
         private readonly ChoreWarsDbContext _context;
 
-        public QuestionController(ChoreWarsDbContext context)
+        private readonly Helper _helper;
+        private readonly IHttpContextAccessor _contextAccessor;
+        public QuestionController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
+            _contextAccessor = contextAccessor;
         }
 
         //TESTING
+        //private List<Player> allPlayers = new List<Player>();
 
         //public IActionResult TestIndex()
         //{
@@ -44,19 +48,19 @@ namespace Chore_Wars.Controllers
         //    }
         //}
 
-        public void AddDummyPlayer()
-        {
-            Player dummyPlayer = new Player();
-            dummyPlayer.FirstName = "Jeff";
-            dummyPlayer.LastName = "Jefferson";
-            dummyPlayer.Age = 31;
-            _context.Player.Add(dummyPlayer);
-            _context.SaveChanges();
-        }
+        //public void AddDummyPlayer()
+        //{
+        //    Player dummyPlayer = new Player();
+        //    dummyPlayer.FirstName = "Jeff";
+        //    dummyPlayer.LastName = "Jefferson";
+        //    dummyPlayer.Age = 31;
+        //    _context.Player.Add(dummyPlayer);
+        //    _context.SaveChanges();
+        //}
 
         //need to set up a 'dummy' list or object in order to contain the data we'll store 
         //in our case, we probably only need to store a single Player at a time
-            //to represent the 'logged in' Player
+        //to represent the 'logged in' Player
 
         //Test action/view to contain
         //public IActionResult TestIndex()
@@ -67,7 +71,6 @@ namespace Chore_Wars.Controllers
 
         ////Test action to save session data
         ////in this case: 
-        //private List<Player> allPlayers = new List<Player>();
         ////1) Creating a new Player (from information provided by the view)
         ////2) Adding that Player to our 'dummy' List
         ////3) Setting the new Session string equal to the new List (SetString), which just received a new Player
@@ -86,12 +89,12 @@ namespace Chore_Wars.Controllers
         //    return RedirectToAction("TestIndex");
         //}
 
-        public IActionResult ClearPlayers()
-        {
-            //clears the current session named "AllPlayerSession"
-            HttpContext.Session.Remove("AllPlayerSession");
-            return RedirectToAction("TestIndex");
-        }
+        //public IActionResult ClearPlayers()
+        //{
+        //    //clears the current session named "AllPlayerSession"
+        //    HttpContext.Session.Remove("AllPlayerSession");
+        //    return RedirectToAction("TestIndex");
+        //}
 
 
 
@@ -108,7 +111,7 @@ namespace Chore_Wars.Controllers
         //}
         ////^TESTING^
 
-      
+
 
         [HttpGet]
         public IActionResult SelectQuestion()
@@ -117,14 +120,13 @@ namespace Chore_Wars.Controllers
         }
 
         [HttpPost]
-        //public IActionResult SelectQuestion(string difficulty)
-        //{
-        //    PopulateFromSession();
-        //    TempData["difficulty"] = difficulty;
-        //    return RedirectToAction("GetQuestion", "Question");
-        //}
-
-
+        public IActionResult SelectQuestion(string difficulty)
+        {
+            //Helper helper = new Helper(_contextAccessor);
+            //var player = helper.PopulateFromSession();
+            TempData["difficulty"] = difficulty;
+            return RedirectToAction("GetQuestion", "Question");
+        }
 
         public async Task<IActionResult> GetQuestion(string difficulty)
         {
@@ -181,8 +183,15 @@ namespace Chore_Wars.Controllers
                 
                 outcome = "Incorrect :(";
                 return View("Result", outcome);
-            }
-            
+            }           
         }
+        public IActionResult TestView()
+        {
+            Helper helper = new Helper(_contextAccessor);
+            var player = helper.PopulateFromSession();
+
+            return View();
+        }
+
     }
 }

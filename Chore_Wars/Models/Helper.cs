@@ -9,23 +9,23 @@ namespace Chore_Wars.Models
 {
     public class Helper
     {
-        public Player sessionPlayer = new Player();
-
-        public Helper()
+        private readonly IHttpContextAccessor _contextAccessor;
+        public Helper(IHttpContextAccessor contextAccessor)
         {
-            HttpContext context;
+            _contextAccessor = contextAccessor;
         }
-        //public static void PopulateFromSession()
-        //{
-        //    //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
-        //    //and re-instantiate(?) it as an object of type List<Player>
-        //    //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
-        //    string playerJson = context.Session.GetString("PlayerSession");
-        //    if (playerJson != null)
-        //    {
-        //        sessionPlayer = JsonConvert.DeserializeObject<Player>(playerJson);
-        //    }
-        //}
+        public Player PopulateFromSession()
+        {
+            //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
+            //and re-instantiate(?) it as an object of type List<Player>
+            //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
+            string playerJson = _contextAccessor.HttpContext.Session.GetString("PlayerSession");
+            if (playerJson != null)
+            {
+                return JsonConvert.DeserializeObject<Player>(playerJson);
+            }
+            return null;
+        }
 
 
     }
