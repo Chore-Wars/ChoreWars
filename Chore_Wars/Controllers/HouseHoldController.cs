@@ -13,7 +13,7 @@ namespace Chore_Wars.Controllers
             return View();
         }
 
-        
+
         public IActionResult RegisterHouseHold(int Id)
         {
             return View();
@@ -25,14 +25,14 @@ namespace Chore_Wars.Controllers
         public IActionResult ViewHouseHoldMembers(String Member)
         {
 
-            
+
             //view will have list of users
             //each user can have a button action to sign in with, each one a form with name/household/submit button goes to an action "Login HouseHoldMemmber"  
             //set up session, session value == to playerID
             //view all members, select with button, redirect to action, which difficulty lvl question, Session user gets points for correct answer or minues for incorrect.  
             //return redirect to action-
             return View();
-        } 
+        }
         public IActionResult LoginPlayer()
         {
             return RedirectToAction("SelectQuestion", "Question");
@@ -41,7 +41,7 @@ namespace Chore_Wars.Controllers
         public IActionResult ViewHouseHoldChores(string Chores)
         {
             return View();
-        }  
+        }
     }
 }
 //LoginHousehold() <- Identity(mostly)
