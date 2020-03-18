@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Chore_Wars.Controllers
 {
-    public class HouseHoldController : Controller
+    public class HouseholdController : Controller
     {
         public IActionResult Index()
         {
