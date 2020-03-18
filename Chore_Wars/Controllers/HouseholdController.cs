@@ -25,45 +25,32 @@ namespace Chore_Wars.Controllers
         }
 
 
-        public IActionResult RegisterHouseHold(int Id)
+        public IActionResult RegisterHouseHold(int id)
         {
             return View();
         }
 
-        //present a list of members that exist inside the household
-        //each household represented by the ASP Net user ID
-        //Create a list "Players-where the ID" bundle list of users and display list of household players
-        public IActionResult ViewHouseHoldMembers(String Member)
+        //public IActionResult ViewHouseHoldMembers(String Member)
+        //{
+
+        //    return View();
+        //}
+
+        public IActionResult ViewPlayers()
         {
-
-
-            //view will have list of users
-            //each user can have a button action to sign in with, each one a form with name/household/submit button goes to an action "Login HouseHoldMemmber"  
-            //set up session, session value == to playerID
-            //view all members, select with button, redirect to action, which difficulty lvl question, Session user gets points for correct answer or minues for incorrect.  
-            //return redirect to action-
-            return View();
+            //  var players = _context.Player.Where(x => x.HouseholdId == null);
+            var players = _context.Player.Where(x => x.UserId != null).ToList();
+            return View(players);
         }
 
         public Player sessionPlayer = new Player();
-        public IActionResult LoginPlayer()
+        public IActionResult LoginPlayer(int id)
         {
-            //get user from database
-            sessionPlayer.FirstName = "bobson";
+
+            sessionPlayer = _context.Player.Find(id);
             HttpContext.Session.SetString("PlayerSession", JsonConvert.SerializeObject(sessionPlayer));
 
             return RedirectToAction("SelectQuestion", "Question");
-        }
-
-        public IActionResult ViewHouseHoldChores(string Chores)
-        {
-            return View();
-        }
-        public IActionResult ViewPlayers()
-        {
-          //  var players = _context.Player.Where(x => x.HouseholdId == null);
-            var players = _context.Player.Where(x => x.UserId != null).ToList();           
-            return View(players);
         }
 
         [HttpGet]
@@ -80,25 +67,11 @@ namespace Chore_Wars.Controllers
             _context.SaveChanges();
             return RedirectToAction();
         }
-        
-        //public IActionResult StoreSessionPlayer 
-        //dummy player for testing Sessions
-        //public void PopulateFromSession()
+
+        //public IActionResult ViewHouseHoldChores(string Chores)
         //{
-        //    //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
-        //    //and re-instantiate(?) it as an object of type List<Player>
-        //    //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
-        //    string playerJson = HttpContext.Session.GetString("PlayerSession");
-        //    if (playerJson != null)
-        //    {
-        //        sessionPlayer = JsonConvert.DeserializeObject<Player>(playerJson);
-        //    }
+        //    return View();
         //}
 
     }
 }
-
-//LoginHousehold() <- Identity(mostly)
-//RegisterHouseHold() <- Enter household name(‘The Cooper Family’)
-//ViewHouseHoldMembers()
-//ViewHouseHoldChores()
