@@ -88,8 +88,12 @@ namespace Chore_Wars.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if(foundPlayer.CurrentPoints == null) { foundPlayer.CurrentPoints = 0; };
                     foundPlayer.CurrentPoints = foundPlayer.CurrentPoints + points;
+                    if(foundPlayer.TotalPoints == null) { foundPlayer.CurrentPoints = 0; };
                     foundPlayer.TotalPoints = foundPlayer.CurrentPoints + points;
+                    if(foundPlayer.CorrectAnswers == null) { foundPlayer.CurrentPoints = 0; };
+                    foundPlayer.CorrectAnswers += 1;
 
                     _context.Entry(foundPlayer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     _context.Update(foundPlayer);
