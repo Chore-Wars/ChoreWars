@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Chore_Wars.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Chore_Wars.Controllers
 {
@@ -18,18 +20,76 @@ namespace Chore_Wars.Controllers
         }
 
         //TESTING
-        private List<Player> houseHoldPlayers = new List<Player>();
 
-        public IActionResult SessionTest()
+        //public IActionResult TestIndex()
+        //{
+        //    PopulateFromSession();
+        //    return View(houseHoldPlayers);
+        //}
+
+        //public IActionResult SessionTest(Player newPlayer)
+        //{
+        //    PopulateFromSession();
+        //    houseHoldPlayers.Add(newPlayer);
+
+        //    HttpContext.Session.SetString("Player", JsonConvert.SerializeObject(houseHoldPlayers));
+        //    //var playerList = _context.Player.ToList();
+        //    return RedirectToAction("TestIndex", houseHoldPlayers);
+        //}
+        //public void PopulateFromSession()
+        //{
+        //    string playerListJson = HttpContext.Session.GetString("Players");
+        //    if (playerListJson != null)
+        //    {
+        //        houseHoldPlayers = JsonConvert.DeserializeObject<List<Player>>(playerListJson);
+        //    }
+        //}
+
+        public void AddDummyPlayer()
         {
-            return View(houseHoldPlayers);
+            Player dummyPlayer = new Player();
+            dummyPlayer.FirstName = "Jeff";
+            dummyPlayer.LastName = "Jefferson";
+            dummyPlayer.Age = 31;
+            _context.Player.Add(dummyPlayer);
+            _context.SaveChanges();
         }
-        //^TESTING^
+
+        private List<Player> allPlayers = new List<Player>();
+
+        public IActionResult TestIndex()
+        {
+            PopulateFromSession();
+            return View(allPlayers);
+        }
+
+        public IActionResult SavePlayer(Player newPlayer)
+        {
+            PopulateFromSession();
+            allPlayers.Add(newPlayer);
+
+            HttpContext.Session.SetString("AllPlayerSession", JsonConvert.SerializeObject(allPlayers));
+            //HttpContext.Session.SetString("User", userName);
+            return RedirectToAction("TestIndex");
+        }
+
+        public IActionResult ClearPlayers()
+        {
+            HttpContext.Session.Remove("AllPlayerSession");
+            return RedirectToAction("TestIndex");
+        }
 
         public void PopulateFromSession()
         {
-
+            string playerListJson = HttpContext.Session.GetString("AllPlayerSession");
+            if(playerListJson != null)
+            {
+                allPlayers = JsonConvert.DeserializeObject<List<Player>>(playerListJson);
+            }
         }
+        //^TESTING^
+
+        
 
         [HttpGet]
         public IActionResult SelectQuestion()

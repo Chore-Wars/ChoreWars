@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "TestIndex";
+}
+@using Microsoft.AspNetCore.Http
+
+@model List<Player>
+
+<h1>TestIndex</h1>
+<form action="../Question/SavePlayer" method="post">
+    <input type="text" name="FirstName" placeholder="first" />
+    <input type="text" name="LastName" placeholder="last" />
+    <input type="submit" name="name" value="Save Player Pls" />
+</form>
+
+@if(Model != null)
+{
+    foreach(Player player in Model)
+    {
+        <p></p>
+        <p>@player.FirstName</p>
+    }
+}
+
+<a asp-controller="Question" asp-action="ClearPlayers">Clear Stored Session Players</a>
+

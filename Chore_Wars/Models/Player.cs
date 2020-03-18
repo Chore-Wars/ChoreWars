@@ -5,6 +5,8 @@ namespace Chore_Wars.Models
 {
     public partial class Player
     {
+        public Player() { }
+
         public int UserId { get; set; }
         public int? HouseholdId { get; set; }
         public string FirstName { get; set; }
@@ -19,5 +21,7 @@ namespace Chore_Wars.Models
         public string PlayerStr2 { get; set; }
         public int? PlayerInt1 { get; set; }
         public int? PlayerInt2 { get; set; }
+    
+    
     }
 }
