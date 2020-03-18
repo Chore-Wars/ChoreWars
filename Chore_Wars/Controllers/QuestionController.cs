@@ -13,7 +13,6 @@ namespace Chore_Wars.Controllers
     public class QuestionController : Controller
     {
         private readonly ChoreWarsDbContext _context;
-
         private readonly Helper _helper;
         private readonly IHttpContextAccessor _contextAccessor;
         public QuestionController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
@@ -21,10 +20,6 @@ namespace Chore_Wars.Controllers
             _context = context;
             _contextAccessor = contextAccessor;
         }
-
-
-
-
 
         [HttpGet]
         public IActionResult SelectQuestion()
@@ -81,15 +76,14 @@ namespace Chore_Wars.Controllers
 
             string outcome;
 
-            //   Player foundPlayer = _context.Player.Find();
-
+            //Player foundPlayer = _context.Player.Find();
             //evaluates Player selection. Awards points if correct, and increments WrongAnswer if incorrect
             if (selection == answer)
             {
                 if (ModelState.IsValid)
                 {
-                    if(foundPlayer.CurrentPoints == null) { foundPlayer.CurrentPoints = 0; };
-                    foundPlayer.CurrentPoints = foundPlayer.CurrentPoints + points;
+                    if(foundPlayer.CurrentPoints == null) { foundPlayer.CurrentPoints = 0; };                    
+                    foundPlayer.CurrentPoints =+ points;
                     if(foundPlayer.TotalPoints == null) { foundPlayer.CurrentPoints = 0; };
                     foundPlayer.TotalPoints = foundPlayer.CurrentPoints + points;
                     if(foundPlayer.CorrectAnswers == null) { foundPlayer.CurrentPoints = 0; };
@@ -107,11 +101,8 @@ namespace Chore_Wars.Controllers
                 //add logic to increment 'WrongAnswer' in Player db table, based on current Player
                 if (ModelState.IsValid)
                 {
-                    if(foundPlayer.IncorrectAnswers == null)
-                    {
-                        foundPlayer.IncorrectAnswers = 0;
-                    }
-                    foundPlayer.IncorrectAnswers = foundPlayer.IncorrectAnswers + 1;
+                    if(foundPlayer.IncorrectAnswers == null) { foundPlayer.IncorrectAnswers = 0; }
+                    foundPlayer.IncorrectAnswers += 1;
 
                     _context.Entry(foundPlayer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     _context.Update(foundPlayer);
