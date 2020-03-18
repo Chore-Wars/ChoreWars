@@ -78,16 +78,16 @@ namespace Chore_Wars.Controllers
         
       //  public IActionResult StoreSessionPlayer 
         //dummy player for testing Sessions
-        Player sessionPlayer = new Player();
+      public Player sessionPlayer = new Player();
         public void PopulateFromSession()
         {
             //tries to get the "AllPlayerSession" as a string. If it exists, de JSON-ify that object
             //and re-instantiate(?) it as an object of type List<Player>
             //if the "AllPlayerSession" JSON-ified situation is blank (null), do nothing.
-            string playerListJson = HttpContext.Session.GetString("PlayerSession");
-            if (playerListJson != null)
+            string playerJson = HttpContext.Session.GetString("PlayerSession");
+            if (playerJson != null)
             {
-                sessionPlayer = JsonConvert.DeserializeObject<Player>(playerListJson);
+                sessionPlayer = JsonConvert.DeserializeObject<Player>(playerJson);
             }
         }
 
