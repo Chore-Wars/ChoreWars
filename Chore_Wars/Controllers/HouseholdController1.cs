@@ -1,50 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Chore_Wars.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Chore_Wars.Controllers
 {
-    public class HouseholdController : Controller
+    public class HouseHoldController : Controller
     {
+        private readonly ChoreWarsDbContext _context;
+        private readonly Helper _helper;
+        private readonly IHttpContextAccessor _contextAccessor;
+        public HouseHoldController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
+        {
+            _context = context;
+            _contextAccessor = contextAccessor;
+        }
         public IActionResult Index()
         {
             return View();
         }
 
 
-        public IActionResult RegisterHouseHold(int Id)
+        public IActionResult RegisterHouseHold(string id)
         {
+            Household newHouseHold = new Household();
+            id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            newHouseHold.AspNetUsers = id;
+            //so, we have the ASPNETUSER ID as a string. Honestly, let's just set a bonus column and pray
+
             return View();
         }
 
-        //present a list of members that exist inside the household
-        //each household represented by the ASP Net user ID
-        //Create a list "Players-where the ID" bundle list of users and display list of household players
-        public IActionResult ViewHouseHoldMembers(String Member)
+        //public IActionResult ViewHouseHoldMembers(String Member)
+        //{
+
+        //    return View();
+        //}
+        //public void RegisterHouseHold(string aspId)
+
+
+        //so.... when we activate these almonds...we need to check:
+        //Does this householdId already exist?
+        //if not, create a new Household in our table (#1, 2, 3, 22, etc)
+
+
+        public IActionResult ViewPlayers()
         {
-
-
-            //view will have list of users
-            //each user can have a button action to sign in with, each one a form with name/household/submit button goes to an action "Login HouseHoldMemmber"  
-            //set up session, session value == to playerID
-            //view all members, select with button, redirect to action, which difficulty lvl question, Session user gets points for correct answer or minues for incorrect.  
-            //return redirect to action-
-            return View();
+            string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var players = _context.Player.Where(x => x.PlayerStr1 == aspId).ToList();
+            //var players = _context.Player.Where(x => x.UserId != null).ToList();
+            return View(players);
         }
-        public IActionResult LoginPlayer()
+
+        public Player sessionPlayer = new Player();
+        public IActionResult LoginPlayer(int id)
         {
+            sessionPlayer = _context.Player.Find(id);
+            HttpContext.Session.SetString("PlayerSession", JsonConvert.SerializeObject(sessionPlayer));
             return RedirectToAction("SelectQuestion", "Question");
         }
 
-        public IActionResult ViewHouseHoldChores(string Chores)
+        [HttpGet]
+        public IActionResult AddNewPlayer()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult AddNewPlayer(Player newPlayer)
+        {
+            //newPlayer.HouseholdId = _context.Household.Find();
+
+            newPlayer.PlayerStr1 = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            _context.Player.Add(newPlayer);
+            _context.SaveChanges();
+            return RedirectToAction("ViewPlayers");
+        }
+
+        //public IActionResult ViewHouseHoldChores(string Chores)
+        //{
+        //    return View();
+        //}
+
     }
 }
-//LoginHousehold() <- Identity(mostly)
-//RegisterHouseHold() <- Enter household name(‘The Cooper Family’)
-//ViewHouseHoldMembers()
-//ViewHouseHoldChores()
