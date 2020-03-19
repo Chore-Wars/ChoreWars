@@ -28,6 +28,12 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Household" asp-action="ViewPlayers">View Household Members</a>
                             </li>
                         }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Chore" asp-action="ViewChores">View Chores</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

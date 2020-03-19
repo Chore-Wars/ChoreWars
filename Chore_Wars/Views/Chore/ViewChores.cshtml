@@ -3,9 +3,15 @@
     ViewData["Title"] = "ViewChores";
 }
 
-@model List<Chore>
+@using Chore_Wars.ViewModels;
+
+@model ViewModelPlayerChore
 
 <h1>Chore List</h1>
+
+@Model.Players[0].FirstName
+@Model.Chores[0].ChoreDescription
+
 
 <table class="table">
     <tr>
@@ -15,26 +21,42 @@
         <th>Point Value</th>
         <th>Due Date</th>
     </tr>
-    @foreach (Chore chore in Model)
-    {
-<tr>
-    @if (chore.UserId == null)
-    {
-        <td><a href="../Chore/AssignChore?id=@chore.ChoreId" class="btn-warning">Assign Chore </a></td>
-    }
 
-    else
-    {
-    <td>@chore.UserId</td>
-    }
-    
-    <td>@chore.ChoreName</td>
-    <td>@chore.ChoreDescription</td>
-    <td>@chore.PointValue</td>
-    <td>@chore.DueDate</td>
-    <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
-    <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
+    @{var choreList = Model.Chores; }
+    @{ var playerList = Model.Players;}
 
-</tr>
+    @foreach (Chore chore in choreList)
+    {
+        <tr>
+            @if (chore.UserId == null)
+            {
+                //setup dropdown list
+
+                <td>
+                        @foreach (Player player in playerList)
+                        //foreach member of household add a selection to dropdown list
+                        {
+                    <form action="../Chore/AssignChore?choreId=@chore.ChoreId&userId=@player.UserId&points=@chore.PointValue" method="post">
+                        <input type="submit" value="@player.FirstName" />
+                    </form>
+                        }
+
+                </td>
+            }
+
+            else
+            {
+                <td>@chore.UserId</td>
+            }
+
+
+            <td>@chore.ChoreName</td>
+            <td>@chore.ChoreDescription</td>
+            <td>@chore.PointValue</td>
+            <td>@chore.DueDate</td>
+            <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
+            <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
+
+        </tr>
     }
 </table>

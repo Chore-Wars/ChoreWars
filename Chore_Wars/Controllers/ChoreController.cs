@@ -1,23 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Chore_Wars.Models;
+using Chore_Wars.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 namespace Chore_Wars.Controllers
 {
     public class ChoreController : Controller
     {
-        
+
 
         private readonly ChoreWarsDbContext _context;
-        public ChoreController(ChoreWarsDbContext context)
+        private readonly Helper _helper;
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public ChoreController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
+            _contextAccessor = contextAccessor;
         }
 
         //display chores in table
         public IActionResult ViewChores()
         {
-            return View(_context.Chore.ToList());
+            ViewModelPlayerChore playerChore = new ViewModelPlayerChore();
+            playerChore.Chores = (_context.Chore.ToList());
+
+            string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            playerChore.Players = _context.Player.Where(x => x.PlayerStr1 == aspId).ToList();
+
+            return View(playerChore);
         }
 
         //add chores to database    
@@ -35,7 +48,7 @@ namespace Chore_Wars.Controllers
                 _context.Chore.Add(newChore);
                 _context.SaveChanges();
             }
-                return RedirectToAction("ViewChores");
+            return RedirectToAction("ViewChores");
         }
 
 
@@ -82,24 +95,36 @@ namespace Chore_Wars.Controllers
 
 
 
-
-
         //assign chores to player. subtract points
-
-        [HttpGet]
-        public IActionResult AssignChore(int id)
+        //take in choreId to assign it
+        //take in userId to assign it to that person
+        //take in the amount of points to be spent
+        public IActionResult AssignChore(int choreId, int userId, int points)
         {
-            Chore found = _context.Chore.Find(id);
 
-           
-                return View(found);
-            
+            Helper helper = new Helper(_contextAccessor);
+            var player = helper.PopulateFromSession();
+            var foundPlayer = _context.Player.Find(player.UserId);
 
+            //subtract from players current points
+            foundPlayer.CurrentPoints = foundPlayer.CurrentPoints - points;
+
+            //assign chore based on userId
+            var assignedChore = _context.Chore.Find(choreId);
+            var assignedPlayer = _context.Player.Find(userId);
+            assignedChore.UserId = assignedPlayer.UserId;
+
+            //update and save assigned chore with the player
+            _context.Entry(assignedChore).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Update(assignedChore);
+
+            //update and save database
+            _context.Entry(foundPlayer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Update(foundPlayer);
+            _context.SaveChanges();
+
+            return RedirectToAction("ViewChores");
         }
-
-
-
-
-
     }
+
 }
