@@ -34,6 +34,18 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Chore" asp-action="ViewChores">View Chores</a>
                             </li>
                         }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Household" asp-action="AddNewPlayer">Add New Player!</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Chore" asp-action="AddChore">Add Chore to Household!</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
