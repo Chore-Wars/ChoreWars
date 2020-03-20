@@ -16,7 +16,6 @@ namespace Chore_Wars.Controllers
     {
 
         private readonly ChoreWarsDbContext _context;
-        private readonly Helper _helper;
         private readonly IHttpContextAccessor _contextAccessor;
         public HomeController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
         {
@@ -40,8 +39,6 @@ namespace Chore_Wars.Controllers
                 return View(players);
             }
             return View();
-            
-
         }
 
         public Player sessionPlayer = new Player();
