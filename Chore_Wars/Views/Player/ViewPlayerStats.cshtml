@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "ViewPlayerStats";
+}
+
+<h1>ViewPlayerStats</h1>
+
+@model List<Player>
+
+@foreach (var player in Model)
+{
+    <p>@player.FirstName </p>
+    <p>@player.LastName</p>
+    <p>Current Points: @player.CurrentPoints</p>
+    <p>Total Points: @player.TotalPoints</p>
+    <p>Incorrect Answers: @player.IncorrectAnswers</p>
+    <p><a href="../Household/LoginPlayer?id=@player.UserId">Log in as this user</a></p>
+}
