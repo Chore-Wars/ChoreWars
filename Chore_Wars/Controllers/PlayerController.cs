@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Chore_Wars.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Chore_Wars.Controllers
 {
@@ -14,6 +16,11 @@ namespace Chore_Wars.Controllers
         public PlayerController(ChoreWarsDbContext context)
         {
             _context = context;
+        }
+
+        public IActionResult ViewPlayerStats()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -55,6 +62,14 @@ namespace Chore_Wars.Controllers
         //    }
         //    return RedirectToAction("Index");
         //}
+
+        public Player sessionPlayer = new Player();
+        public IActionResult LoginPlayer(int id)
+        {
+            sessionPlayer = _context.Player.Find(id);
+            HttpContext.Session.SetString("PlayerSession", JsonConvert.SerializeObject(sessionPlayer));
+            return RedirectToAction("SelectQuestion", "Player");
+        }
         public IActionResult Index()
         {
             return View();
