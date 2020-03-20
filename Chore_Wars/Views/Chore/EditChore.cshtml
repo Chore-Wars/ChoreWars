@@ -5,17 +5,46 @@
 
 @model Chore
 
-<h1>Edit Chore</h1>
+<style>
+    body{
 
-<form action="../Chore/EditChore" method="post">
-    <input type="hidden" name="ChoreId" value="@Model.ChoreId" />
-    <input type="text" name="ChoreName" value="@Model.ChoreName" />
-    <input type="text" name="ChoreDescription" value="@Model.ChoreDescription" />
-    Point Value: <input type="number" min="1" max="10" name="PointValue" required />
-    Due Date: <input type="date" name="DueDate" required />
+    }
 
-    <input type="submit" value="Save Changes" />
+    #editChoreHeader {
+        text-align: center;
+        font-style: oblique;
+        color: #0094ff;
+        background-color: black;
+        font-weight:900;
+    }
 
-</form>
+    #editChoreForm {
+        text-align: justify;
+        color: #0094ff;
+        columns: auto;
+        font-weight: 900;
+    }
 
+
+</style>
+
+    <div id="editChoreHeader">
+        <h1>Edit Chore</h1>
+    </div>
+
+<div id="editChoreForm" >
+    
+    
+        <form action="../Chore/EditChore" method="post">
+            <input type="hidden" name="ChoreId" value="@Model.ChoreId" /> <br /><br />
+            Name: <input type="text" name="ChoreName" value="@Model.ChoreName" /><br /><br />
+            Description: <input type="text" name="ChoreDescription" value="@Model.ChoreDescription" /><br /><br />
+            Point Value: <input type="number" min="1" max="10" name="PointValue" required /><br /><br />
+            Due Date: <input type="date" name="DueDate" required /><br /><br />
+
+            <input type="submit" value="Save Changes" />
+
+        </form>
+    
+</div>
 
