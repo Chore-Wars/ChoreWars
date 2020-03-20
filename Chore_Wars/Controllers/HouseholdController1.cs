@@ -13,7 +13,6 @@ namespace Chore_Wars.Controllers
     public class HouseHoldController : Controller
     {
         private readonly ChoreWarsDbContext _context;
-        private readonly Helper _helper;
         private readonly IHttpContextAccessor _contextAccessor;
         public HouseHoldController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
         {
@@ -25,30 +24,16 @@ namespace Chore_Wars.Controllers
             return View();
         }
 
-
+        //READY FOR DEPECIATION - NOT BEING USED
         public IActionResult RegisterHouseHold(string id)
         {
             Household newHouseHold = new Household();
             id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             newHouseHold.AspNetUsers = id;
-            //so, we have the ASPNETUSER ID as a string. Honestly, let's just set a bonus column and pray
-
             return View();
         }
 
-        //public IActionResult ViewHouseHoldMembers(String Member)
-        //{
-
-        //    return View();
-        //}
-        //public void RegisterHouseHold(string aspId)
-
-
-        //so.... when we activate these almonds...we need to check:
-        //Does this householdId already exist?
-        //if not, create a new Household in our table (#1, 2, 3, 22, etc)
-
-
+        //READY FOR DEPRECIATION
         public IActionResult ViewPlayers()
         {
             string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -57,6 +42,7 @@ namespace Chore_Wars.Controllers
             return View(players);
         }
 
+        //READY FOR DEPRECIATION
         public Player sessionPlayer = new Player();
         public IActionResult LoginPlayer(int id)
         {
@@ -73,19 +59,21 @@ namespace Chore_Wars.Controllers
 
         [HttpPost]
         public IActionResult AddNewPlayer(Player newPlayer)
-        {
-            //newPlayer.HouseholdId = _context.Household.Find();
-
+        {          
+            //initialize all Player properties
             newPlayer.PlayerStr1 = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            newPlayer.CurrentPoints = 0;
+            newPlayer.TotalPoints = 0;
+            newPlayer.CorrectAnswers = 0;
+            newPlayer.IncorrectAnswers = 0;
+            newPlayer.ChoresComplete = 0;
+            newPlayer.PlayerStr2 = "";
+            newPlayer.PlayerInt1 = 0;
+            newPlayer.PlayerInt2 = 0;
+            
             _context.Player.Add(newPlayer);
             _context.SaveChanges();
             return RedirectToAction("ViewPlayers");
         }
-
-        //public IActionResult ViewHouseHoldChores(string Chores)
-        //{
-        //    return View();
-        //}
-
     }
 }
