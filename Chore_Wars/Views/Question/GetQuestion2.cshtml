@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "GetQuestion2";
+}
+
+@using Chore_Wars.ViewModels;
+
+@model ViewModelQuestions
+
+<h1>GetQuestion2</h1>
+
+@if (Model.ApiQuestion == null)
+{
+    <p>Question: @Model.CustomQuestion.Question1</p>
+}
+else
+{
+    <p>Question: @Model.ApiQuestion.results[0].question</p>
+}
+
+
