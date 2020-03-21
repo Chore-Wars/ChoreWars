@@ -16,11 +16,12 @@
             font-weight: 900
         }
         #choosePlayer {
+            text-align:center;
             color: gold;
             font-weight: 500;
             
         }
-        #playerLink{
+        #playerLink {
             color: gold;
         }
     </style>
@@ -36,7 +37,7 @@
     <h3 id="choosePlayer"><u>CHOOSE YOUR PLAYER</u></h3>
     @foreach (var player in Model)
     {
-        <p><a href="../Home/LoginPlayer?id=@player.UserId" id="playerLink">@player.FirstName @player.LastName</a></p>
+        <p class="text-center"><a href="../Home/LoginPlayer?id=@player.UserId" id="playerLink">@player.FirstName @player.LastName</a></p>
     }
 }
 

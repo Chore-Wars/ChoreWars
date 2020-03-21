@@ -20,18 +20,19 @@
         
         #addChoreForm {
             text-align: justify;
-            color: #572182;s
+            color: #572182;
             columns: auto;
             font-weight: 900;
         }
     </style>
 <h1 id="addChoreHeader"><u>Add Chore</u></h1>
 
-<form id="addChoreForm" action="../Chore/AddChore" method="post">
-    <br /><br /><br />
+<form id="addChoreForm" action="../Chore/AddChore" method="post" style="background-color:WindowFrame" class="col-4">
+    <br /><br />
     Name: <input type="text" name="ChoreName" placeholder="Name" /><br /><br />
     Description: <input type="text" name="ChoreDescription" placeholder="Description" /><br /><br />
     Point Value: <input type="number" min="1" max="10" name="PointValue" required /><br /><br />
     Due Date: <input type="date" name="DueDate" required /><br /><br />
-    <input type="submit" value="Add Chore!" />
+    <input type="submit" value="Add Chore!" class="btn-success" />
+    <br /><br />
 </form>
