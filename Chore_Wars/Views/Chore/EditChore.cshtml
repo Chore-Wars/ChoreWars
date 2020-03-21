@@ -6,8 +6,10 @@
 @model Chore
 
 <style>
-    body{
-
+    body {
+        background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
     }
 
     #editChoreHeader {
@@ -15,7 +17,7 @@
         font-style: oblique;
         color: #0094ff;
         background-color: black;
-        font-weight:900;
+        font-weight: 900;
     }
 
     #editChoreForm {
@@ -28,23 +30,21 @@
 
 </style>
 
-    <div id="editChoreHeader">
-        <h1>Edit Chore</h1>
-    </div>
+        <h1 id="editChoreHeader"><u>Edit Chore</u></h1>
+
 
 <div id="editChoreForm" >
-    
-    
-        <form action="../Chore/EditChore" method="post">
-            <input type="hidden" name="ChoreId" value="@Model.ChoreId" /> <br /><br />
-            Name: <input type="text" name="ChoreName" value="@Model.ChoreName" /><br /><br />
-            Description: <input type="text" name="ChoreDescription" value="@Model.ChoreDescription" /><br /><br />
-            Point Value: <input type="number" min="1" max="10" name="PointValue" required /><br /><br />
-            Due Date: <input type="date" name="DueDate" required /><br /><br />
+    <form action="../Chore/EditChore" method="post">
+        <br /><br />
+        <input type="hidden" name="ChoreId" value="@Model.ChoreId" /> <br /><br />
+        Name: <input type="text" name="ChoreName" value="@Model.ChoreName" /><br /><br />
+        Description: <input type="text"  name="ChoreDescription" value="@Model.ChoreDescription" /><br /><br />
+        Point Value: <input type="number" min="1" max="10" name="PointValue" required /><br /><br />
+        Due Date: <input type="date" name="DueDate" required /><br /><br />
 
-            <input type="submit" value="Save Changes" />
+        <input type="submit" value="Save Changes" />
 
-        </form>
+    </form>
     
 </div>
 

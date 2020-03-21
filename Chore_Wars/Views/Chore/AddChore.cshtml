@@ -3,14 +3,36 @@
     ViewData["Title"] = "AddChore";
 }
 
-<h1>Add Chore</h1>
+    <style>
+        body {
+            background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
 
-<form action="../Chore/AddChore" method="post">
+        #addChoreHeader {
+            text-align: center;
+            font-style: oblique;
+            color: #572182;
+            background-color: black;
+            font-weight: 900;
+        }
+        
+        #addChoreForm {
+            text-align: justify;
+            color: #572182;
+            columns: auto;
+            font-weight: 900;
+        }
+    </style>
+<h1 id="addChoreHeader"><u>Add Chore</u></h1>
 
-    <input type="text" name="ChoreName" placeholder="Name"/>
-    <input type="text" name="ChoreDescription" placeholder="Description" />
-    Point Value: <input type="number" min="1" max="10" name="PointValue" required />
-    Due Date: <input type="date" name="DueDate" required />
-    <input type="submit"  value="Add Chore!" />
-    
+<form id="addChoreForm" action="../Chore/AddChore" method="post" style="background-color:WindowFrame" class="col-4">
+    <br /><br />
+    Name: <input type="text" name="ChoreName" placeholder="Name" /><br /><br />
+    Description: <input type="text" name="ChoreDescription" placeholder="Description" /><br /><br />
+    Point Value: <input type="number" min="1" max="10" name="PointValue" required /><br /><br />
+    Due Date: <input type="date" name="DueDate" required /><br /><br />
+    <input type="submit" value="Add Chore!" class="btn-success" />
+    <br /><br />
 </form>

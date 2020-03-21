@@ -7,88 +7,85 @@
 
 @model ViewModelPlayerChore
 
-    <style>
-        body {
-            background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
+<style>
+    body {
+        background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
 
-        #yourChoreList {
-            text-align: center;
-            font-style: oblique;
-            color: #0ebb18;
-            background-color: black;
-            
-        }
+    #choreListHeader {
+        text-align: center;
+        font-style: oblique;
+        color: #0ebb18;
+        background-color: black;
+        font-weight: 900;
+    }
 
-        #choreTable {
-            text-emphasis-color: gold;
-            font-weight: 500;
-        }
-    </style>
+    #choreTable {
+        font-weight: 500;
+    }
+</style>
 
 
-    <div id="yourChoreList">
-        <h1>Your Chore List</h1>
-    </div>
+<h1 id="choreListHeader"><u>Your Chore List</u></h1>
 
-    <div id="choreTable">
+<div id="choreTable">
 
-        <table class="table" style="color: gold">
-            <tr style="font-weight:900">
-                <th>Player Name</th>
-                <th>Chore Name</th>
-                <th>Description</th>
-                <th>Point Value</th>
-                <th>Due Date</th>
-            </tr>
+    <table class="table" style="color:#0ebb18; background-color:WindowText">
+        <tr style="font-weight:900">
+            <th>Player Name</th>
+            <th>Chore Name</th>
+            <th>Description</th>
+            <th>Point Value</th>
+            <th>Due Date</th>
+        </tr>
 
-            @{var choreList = Model.Chores; }
-            @{ var playerList = Model.Players;}
+        @{var choreList = Model.Chores; }
+        @{ var playerList = Model.Players;}
 
-            @foreach (Chore chore in choreList)
-            {
-                <tr>
-                    @if (chore.UserId == null)
-                    {
-                        //setup dropdown list
+        @foreach (Chore chore in choreList)
+        {
+            <tr>
+                @if (chore.UserId == null)
+                {
+                    //setup dropdown list
 
-                        <td>
-                            @foreach (Player player in playerList)
-                            //foreach member of household add a selection to dropdown list
-                            {
-                                <form action="../Chore/AssignChore?choreId=@chore.ChoreId&userId=@player.UserId&points=@chore.PointValue" method="post">
-                                    <input type="submit" value="@player.FirstName" />
-                                </form>
-                            }
+                    <td>
+                        @foreach (Player player in playerList)
+                        //foreach member of household add a selection to dropdown list
+                        {
+                            <form action="../Chore/AssignChore?choreId=@chore.ChoreId&userId=@player.UserId&points=@chore.PointValue" method="post">
+                                <input type="submit" value="@player.FirstName" />
+                            </form>
+                        }
 
-                        </td>
-                    }
+                    </td>
+                }
 
-                    else
-                    {
-                        <td>
-                            @foreach (Player player1 in playerList)
-                            {
-                                //print name of player instead on userId
-                                @player1.FirstName
+                else
+                {
+                    <td>
+                        @foreach (Player player1 in playerList)
+                        {
+                            //print name of player instead on userId
+                            @player1.FirstName
 
-                                //where userId = assigned userId
+                            //where userId = assigned userId
 
-                            }
+                        }
                     </td>
                 }
 
 
-                    <td>@chore.ChoreName</td>
-                    <td>@chore.ChoreDescription</td>
-                    <td>@chore.PointValue</td>
-                    <td>@chore.DueDate</td>
-                    <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
-                    <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
+                <td>@chore.ChoreName</td>
+                <td>@chore.ChoreDescription</td>
+                <td>@chore.PointValue</td>
+                <td>@chore.DueDate</td>
+                <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
+                <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
 
-                </tr>
-            }
-        </table>
-    </div>
+            </tr>
+        }
+    </table>
+</div>

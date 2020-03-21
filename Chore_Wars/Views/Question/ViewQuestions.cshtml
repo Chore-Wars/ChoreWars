@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "ViewQuestions";
+}
+
+@model List<Question>
+
+<h1>View Questions</h1>
+
+<table class="table table-bordered">
+    @foreach (Question question in Model)
+    {
+        <tr>
+            <td>@question.Category</td>
+            <td>@question.Difficulty</td>
+            <td>@question.Question1</td>
+            <td>@question.CorrectAnswer</td>
+            <td>@question.IncorrectAnswer1</td>
+        </tr>
+    }
+</table>

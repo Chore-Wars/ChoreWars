@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Chore_Wars.Models;
 using Microsoft.AspNetCore.Http;
@@ -31,39 +32,65 @@ namespace Chore_Wars.Controllers
         }
 
         [HttpPost]
-        public IActionResult SelectQuestion(string difficulty, string category)
+        public IActionResult SelectQuestion(string difficulty, string category, string apiOrCustom)
         {
             //Helper helper = new Helper(_contextAccessor);
             //var player = helper.PopulateFromSession();
             TempData["difficulty"] = difficulty;
             TempData["category"] = category;
+
+            //change this line to   = apiOrCustom
+            TempData["apiOrCustom"] = "api";
+            //get custom question button guy logic
             return RedirectToAction("GetQuestion", "Question");
         }
 
         public async Task<IActionResult> GetQuestion()
         {
+            //loads data from SelectQuestion, and retreives specified question from Trivia API
             var loadDifficulty = TempData["difficulty"];
             var loadCategory = TempData["category"];
-            var question = await GetAPIQuestion(loadDifficulty, loadCategory);
+            var loadAPIorCustom = TempData["apiOrCustom"];
 
-            //mixes up answers and assigns them to the all_answers property (see ApiQuestion class)
-            question.results[0].ScrambleAnswers(question.results[0].correct_answer, question.results[0].incorrect_answers);
+            if(loadAPIorCustom.ToString() == "custom")
+            {
+                string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var questions = _context.Question.Where(x => x.QuestionStr1 == aspId).ToList();
 
-            //determine point value based on question difficulty
-            if (question.results[0].difficulty == "easy")
-            {
-                question.results[0].point_value = 3;
+                //1) find a way to randomize the question pulled from the Db
+                Random random = new Random();
+                int indexOffset = 1;
+                int countQuestions = _context.Question.Count(x => x.QuestionStr1 == aspId);                
+                int myRandom = random.Next(0, countQuestions);
+                Question getQuestion = questions[myRandom];
+
+                //2) randomize the order of the answers
+                return View(getQuestion);
             }
-            else if (question.results[0].difficulty == "medium")
-            {
-                question.results[0].point_value = 5;
-            }
+            //need a way to ask "is this an API question, or a custom question"
             else
             {
-                question.results[0].point_value = 8;
+                var question = await GetAPIQuestion(loadDifficulty, loadCategory);
+                //mixes up answers and assigns them to the all_answers property (see ApiQuestion class)
+                question.results[0].ScrambleAnswers(question.results[0].correct_answer, question.results[0].incorrect_answers);
+
+                //determine point value based on question difficulty
+                if (question.results[0].difficulty == "easy")
+                {
+                    question.results[0].point_value = 3;
+                }
+                else if (question.results[0].difficulty == "medium")
+                {
+                    question.results[0].point_value = 5;
+                }
+                else
+                {
+                    question.results[0].point_value = 8;
+                }
+                return View(question);
             }
 
-            return View(question);
+
         }
 
         public async Task<ApiQuestion> GetAPIQuestion(Object tDifficulty, Object tCategory)
@@ -114,6 +141,37 @@ namespace Chore_Wars.Controllers
                 return View("Result", outcome);
             }
         }
+
+        [HttpGet]
+        public IActionResult AddQuestion()
+        {
+            //setup form to take in input from user
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddQuestion(Question newQuestion)
+        {
+            //take user input, and setup new Question (MODEL BIND) 
+            if (ModelState.IsValid)
+            {
+                newQuestion.QuestionStr1 = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                _context.Question.Add(newQuestion);
+                _context.SaveChanges();
+            }
+            //send to ManageQuestions for now. Consider proper user flow later.
+            return RedirectToAction("ViewQuestions");
+        }
+
+        public IActionResult ViewQuestions()
+        {
+            //go get the custom questions from household(ASPNETUSER), and send over a list of them
+            string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<Question> foundQuestions = _context.Question.Where(x => x.QuestionStr1 == aspId).ToList();
+
+            return View(foundQuestions);
+        }
+
         public IActionResult TestView()
         {
             Helper helper = new Helper(_contextAccessor);

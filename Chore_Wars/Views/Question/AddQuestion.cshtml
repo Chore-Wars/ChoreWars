@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "AddQuestion";
+}
+
+
+
+<h1>Add Question</h1>
+
+
+<form action="../Question/AddQuestion" method="post">
+    <input type="text" name="Category" placeholder="Category" />
+    <select name="Difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+    </select>
+    <input type="number" name="PointValue" min="1" placeholder="Point Value" />
+    <input type="text" name="Question1" placeholder="Question Text" />
+    <input type="text" name="CorrectAnswer" placeholder="Correct Answer" />
+    <input type="text" name="IncorrectAnswer1" placeholder="Incorrect Answer" />
+    <input type="text" name="IncorrectAnswer2" placeholder="Incorrect Answer" />
+    <input type="text" name="IncorrectAnswer3" placeholder="Incorrect Answer" />
+
+    <input type="submit" value="Add Question" />
+</form>

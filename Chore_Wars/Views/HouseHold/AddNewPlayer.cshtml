@@ -3,18 +3,37 @@
     ViewData["Title"] = "AddNewPlayer";
 }
 
-<h1>AddNewPlayer</h1>
+    <style>
+        body {
+            background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
 
-<form action="../Household/AddNewPlayer" method="post" class="form-control">
-    First Name: <input type="text" name="FirstName" placeholder="First Name" />
-    Last Name: <input type="text" name="LastName" placeholder="Last Name" />
-    Age: <input type="number" name="Age" placeholder="Age" />
+        #newPlayerHeader {
+            text-align: center;
+            font-style: oblique;
+            color: #ff0000;
+            background-color: black;
+            font-weight: 900;
+        }
 
+        #newPlayerForm {
+            text-align: justify;
+            color: #ff0000;
+            columns:auto;
+            font-weight: 900;
 
+        }
+    </style>
+
+<h1 id="newPlayerHeader"><u>Add New Player</u></h1>
+
+<form action="../Household/AddNewPlayer" method="post" id="newPlayerForm">
+    <br /><br /><br />
+    First Name: <input type="text" name="FirstName" placeholder="First Name" /><br /><br />
+    Last Name: <input type="text" name="LastName" placeholder="Last Name" /><br /><br />
+    Age: <input type="number" name="Age" placeholder="Age" /><br /><br />
     <input type="submit" value="Add Player!" />
-
-
-
-
 </form>
 
