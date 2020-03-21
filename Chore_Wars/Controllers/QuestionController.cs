@@ -24,8 +24,10 @@ namespace Chore_Wars.Controllers
         [HttpGet]
         public IActionResult SelectQuestion()
         {
-            //send over PlayerChore ViewModel
-            return View();
+            Helper helper = new Helper(_contextAccessor);
+            var player = helper.PopulateFromSession();
+            var foundPlayer = _context.Player.Find(player.UserId);
+            return View(foundPlayer);
         }
 
         [HttpPost]

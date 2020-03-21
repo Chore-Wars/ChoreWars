@@ -42,26 +42,13 @@ namespace Chore_Wars.Controllers
             return View();
         }
 
-        //public IActionResult DeletePlayer(int id)
-        //{
-        //    Player found = _context.Player.Find(id);
-        //    if (found != null)
-        //    {
-        //        List<Player> thisPlayer = _context.Player.Remove()
-        //        //List<Player> thisPlayer = _context.Player.Where(x => x.UserId == found.UserId).ToList();
-        //        if (thisPlayer != null)
-        //        {
-        //            foreach (Player player in thisPlayer)
-        //            {
-        //                player.UserId = null;
-        //            }
-        //        }
-
-        //        _context.Player.Remove(found);
-        //        _context.SaveChanges();
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+        public IActionResult DeletePlayer(int id)
+        {
+            var found = _context.Player.Find(id);
+            _context.Player.Remove(found);
+            _context.SaveChanges();
+            return RedirectToAction("ViewPlayers", "Household");
+        }
 
         public Player sessionPlayer = new Player();
         public IActionResult LoginPlayer(int id)

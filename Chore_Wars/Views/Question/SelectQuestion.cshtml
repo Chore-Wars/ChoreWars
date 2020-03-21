@@ -3,20 +3,18 @@
     ViewData["Title"] = "SelectQuestion";
 }
 
-@using Chore_Wars.ViewModels;
-
 @model Player
 
-<h1>SelectQuestion</h1>
+<h1 style="background-color:orange;">SelectQuestion</h1>
 
 
 
 
 <form action="../Question/SelectQuestion" method="post">
-    
-    Category:<select  name="category">
-    <option value="10">Books</option>
-    <option value="15">Video Games</option>
+
+    Category:<select name="category">
+        <option value="10">Books</option>
+        <option value="15">Video Games</option>
     </select>
 
     <input type="submit" name="difficulty" value="easy" />
@@ -25,4 +23,10 @@
 </form>
 
 
-<h1>@Model.FirstName</h1>
+<h1 style="background-color:DodgerBlue;">@Model.FirstName @Model.LastName Stats</h1>
+
+<p>Current Points:    <b>@Model.CurrentPoints</b></p>
+<p>Total Points:      <b>@Model.TotalPoints</b></p>
+<p>Correct Answers:   <b>@Model.CorrectAnswers</b></p>
+<p>Incorrect Answers: <b>@Model.IncorrectAnswers</b></p>
+<p>Chores Complete:   <b>@Model.ChoresComplete</b></p>
