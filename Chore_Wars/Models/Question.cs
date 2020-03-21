@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Chore_Wars.Models
 {
@@ -19,5 +20,6 @@ namespace Chore_Wars.Models
         public string QuestionStr2 { get; set; }
         public int? QuestionInt1 { get; set; }
         public int? QuestionInt2 { get; set; }
+
     }
 }

@@ -79,6 +79,7 @@ namespace Chore_Wars.Controllers
             var loadCategory = TempData["category"];
             var loadAPIorCustom = TempData["apiOrCustom"];
             
+            //defaults to calling api questions if tempdata is lost
             if(loadAPIorCustom == null)
             {
                 loadAPIorCustom = "api";
@@ -89,14 +90,10 @@ namespace Chore_Wars.Controllers
                 var questions = _context.Question.Where(x => x.QuestionStr1 == aspId).ToList();
 
                 //1) find a way to randomize the question pulled from the Db
+                //int indexOffset = 1;
                 Random random = new Random();
-                int indexOffset = 1;
-
-                //int countQuestions = _context.Question.Count(x => x.QuestionStr1 == aspId);
                 int myRandom = random.Next(0, questions.Count);
-                //Question getQuestion = questions[myRandom];
                 ViewModelQuestions getQuestion = new ViewModelQuestions(questions[myRandom]);
-                //getQuestion.CustomQuestion.Add(questions[myRandom]);
 
                 //2) randomize the order of the answers
                 return View(getQuestion);
