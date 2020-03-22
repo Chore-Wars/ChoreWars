@@ -35,44 +35,13 @@ namespace Chore_Wars.Controllers
         [HttpPost]
         public IActionResult SelectQuestion(string difficulty, string category, string apiOrCustom)
         {
-            //Helper helper = new Helper(_contextAccessor);
-            //var player = helper.PopulateFromSession();
             TempData["difficulty"] = difficulty;
             TempData["category"] = category;
-            //change this line to   = apiOrCustom
             TempData["apiOrCustom"] = apiOrCustom;
-            //get custom question button guy logic
-            return RedirectToAction("GetQuestion2", "Question");
-        }
+            return RedirectToAction("GetQuestion", "Question");
+        }      
 
         public async Task<IActionResult> GetQuestion()
-        {
-            //loads data from SelectQuestion, and retreives specified question from Trivia API
-            var loadDifficulty = TempData["difficulty"];
-            var loadCategory = TempData["category"];
-
-            var question = await GetAPIQuestion(loadDifficulty, loadCategory);
-            //mixes up answers and assigns them to the all_answers property (see ApiQuestion class)
-            question.results[0].ScrambleAnswers(question.results[0].correct_answer, question.results[0].incorrect_answers);
-
-            //determine point value based on question difficulty
-            if (question.results[0].difficulty == "easy")
-            {
-                question.results[0].point_value = 3;
-            }
-            else if (question.results[0].difficulty == "medium")
-            {
-                question.results[0].point_value = 5;
-            }
-            else
-            {
-                question.results[0].point_value = 8;
-            }
-            return View(question);
-
-        }
-
-        public async Task<IActionResult> GetQuestion2()
         {
             //loads data from SelectQuestion, and retreives specified question from Trivia API
             var loadDifficulty = TempData["difficulty"];
@@ -196,6 +165,60 @@ namespace Chore_Wars.Controllers
             return RedirectToAction("ViewQuestions");
         }
 
+        [HttpGet]
+        public IActionResult EditQuestion(int id)
+        {
+            Question found = _context.Question.Find(id);
+            if (found != null)
+            {
+                return View(found);
+            }
+            return RedirectToAction("ViewQuestions");
+        }
+
+        [HttpPost]
+        public IActionResult EditQuestion(Question editedQuestion)
+        {
+            Question dbQuestion = _context.Question.Find(editedQuestion.QuestionId);
+            if (ModelState.IsValid)
+            {
+                dbQuestion.Category = editedQuestion.Category;
+                dbQuestion.Difficulty = editedQuestion.Difficulty;
+                dbQuestion.PointValue = editedQuestion.PointValue;
+                dbQuestion.Question1 = editedQuestion.Question1;
+                dbQuestion.CorrectAnswer = editedQuestion.CorrectAnswer;
+                dbQuestion.IncorrectAnswer1 = editedQuestion.IncorrectAnswer1;
+                dbQuestion.IncorrectAnswer2 = editedQuestion.IncorrectAnswer2;
+                dbQuestion.IncorrectAnswer3 = editedQuestion.IncorrectAnswer3;
+
+                _context.Entry(dbQuestion).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _context.Update(dbQuestion);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ViewQuestions");
+        }
+
+        public IActionResult DeleteQuestion(int id)
+        {
+            Question found = _context.Question.Find(id);
+            if (found != null)
+            {
+                _context.Question.Remove(found);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ViewQuestions");
+        }
+        public IActionResult DeleteChore(int id)
+        {
+            Chore Found = _context.Chore.Find(id);
+            if (Found != null)
+            {
+                _context.Chore.Remove(Found);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ViewChores");
+        }
+
         public IActionResult ViewQuestions()
         {
             //go get the custom questions from household(ASPNETUSER), and send over a list of them
@@ -205,13 +228,7 @@ namespace Chore_Wars.Controllers
             return View(foundQuestions);
         }
 
-        public IActionResult TestView()
-        {
-            Helper helper = new Helper(_contextAccessor);
-            var player = helper.PopulateFromSession();
-
-            return View();
-        }
+        
 
         //build a method for customizing api calls
         //based on CATEGORY && DIFFICULTY
