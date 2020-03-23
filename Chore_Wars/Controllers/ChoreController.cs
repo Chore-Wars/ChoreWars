@@ -33,15 +33,12 @@ namespace Chore_Wars.Controllers
             ViewModelPlayerChore playerChore = new ViewModelPlayerChore();
 
             playerChore.LoggedInPlayer = foundPlayer;
-            //playerChore.UserAssignedTo = (_context.Player.Where(x => x.FirstName == _context.Chore.Where(j => j.UserId ==)));
 
-
-            //playerChore.Chores = (_context.Chore.ToList());
+            //gets list of chores in Household
             playerChore.Chores = (_context.Chore.Where(x => x.ChoreStr1 == aspId).ToList());
 
+            //gets a list of players in the Household
             playerChore.Players = _context.Player.Where (x => x.PlayerStr1 == aspId).ToList();
-            //List<Chore> thisHouseholdsChores = _context.Chore.Where(x => x.ChoreStr1 == aspId).ToList();
-
             return View(playerChore);
         }
 

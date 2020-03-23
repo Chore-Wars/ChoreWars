@@ -3,32 +3,56 @@
     ViewData["Title"] = "AddQuestion";
 }
 
+<style>
+    body {
+        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    #choreWarsHeader {
+        text-align: center;
+        color: gold;
+        font-weight: 900
+    }
+</style>
 
 
-<h1>Add Question</h1>
+<h1 id="choreWarsHeader">Add a Question:</h1>
 
+    
+    <form action="../Question/AddQuestion" method="post">
+        @*UNUSED <input type="text" name="Category" placeholder="Category" />*@ 
+        <div class="col-md-4 offset-md-4">
+            <!--<label for="difficulty">Difficluty:</label>-->
+            <select class="form-control" id="difficulty" name="Difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
 
-<form action="../Question/AddQuestion" method="post">
-    <input type="text" name="Category" placeholder="Category" />
-    <select name="Difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-    </select>
-    <br />
-    <br />
-    <input type="number" name="PointValue" min="1" placeholder="Point Value" />
-    <br />
-    <input type="text" name="Question1" placeholder="Question Text" />
-    <br />
-    <br />
-    <input type="text" name="CorrectAnswer" placeholder="Correct Answer" />
-    <br />
-    <input type="text" name="IncorrectAnswer1" placeholder="Incorrect Answer" />
-    <br />
-    <input type="text" name="IncorrectAnswer2" placeholder="Incorrect Answer" />
-    <br />
-    <input type="text" name="IncorrectAnswer3" placeholder="Incorrect Answer" />
+        <div class="col-md-4 offset-md-4">
+            <input class="form-control" type="number" name="PointValue" placeholder="Point Value" required min="1" max="100" />
+        </div>
 
-    <input type="submit" value="Add Question" />
-</form>
+        <br />
+
+        <div class="col-md-4 offset-md-4">
+            <!--<label for="questionText">Question:</label>-->
+            <textarea class="form-control" type="text" rows="3" id="questionText" name="Question1" placeholder="Question Text" maxlength="440"></textarea>
+        </div>
+
+        <br />
+
+        <div class="col-md-4 offset-md-4">
+            <input class="form-control" type="text" name="CorrectAnswer" placeholder="Correct Answer" required maxlength="50" />
+            <input class="form-control" type="text" name="IncorrectAnswer1" placeholder="Incorrect Answer" required maxlength="50" />
+            <input class="form-control" type="text" name="IncorrectAnswer2" placeholder="Incorrect Answer" required maxlength="50" />
+            <input class="form-control" type="text" name="IncorrectAnswer3" placeholder="Incorrect Answer" required maxlength="50" />
+        </div>
+
+        <div class="col-md-4 offset-md-4">
+            <input class="btn btn-success btn-block" type="submit" value="Add" />
+        </div>
+    </form>

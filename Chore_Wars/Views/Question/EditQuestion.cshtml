@@ -3,26 +3,56 @@
     ViewData["Title"] = "EditQuestion";
 }
 
-<h1>Edit Question</h1>
+<style>
+    body {
+        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    #choreWarsHeader {
+        text-align: center;
+        color: gold;
+        font-weight: 900
+    }
+</style>
+
+<h1 id="choreWarsHeader">Edit Question</h1>
 
 @model Question
 
 
 <form action="../Question/EditQuestion" method="post">
     <input type="hidden" name="QuestionId" value="@Model.QuestionId" />
-    <input type="text" name="Category" value="@Model.Category" placeholder="Category" />
-    <select name="Difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-    </select>
-    <input type="number" name="PointValue" min="1" value="@Model.PointValue" placeholder="Point Value" />
-    <input type="text" name="Question1" value="@Model.Question1" placeholder="Question Text" />
-    <input type="text" name="CorrectAnswer" value="@Model.CorrectAnswer" placeholder="Correct Answer" />
-    <input type="text" name="IncorrectAnswer1" value="@Model.IncorrectAnswer1" placeholder="Incorrect Answer" />
-    <input type="text" name="IncorrectAnswer2" value="@Model.IncorrectAnswer2" placeholder="Incorrect Answer" />
-    <input type="text" name="IncorrectAnswer3" value="@Model.IncorrectAnswer3" placeholder="Incorrect Answer" />
+    @*UNUSED <input type="text" name="Category" value="@Model.Category" placeholder="Category" />*@
+    <div class="col-md-4 offset-md-4">
+        <select class="form-control" name="Difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+    </div>
 
-    <input type="submit" value="Save Changes" />
+    <div class="col-md-4 offset-md-4">
+        <input class="form-control" type="number" name="PointValue" value="@Model.PointValue" placeholder="Point Value" min="1" max="100" required />
+    </div>
+
+    <br />
+    <div class="col-md-4 offset-md-4">
+        <textarea class="form-control" name="Question1" value="@Model.Question1" placeholder="Question Text" maxlength="440">@Model.Question1</textarea>
+    </div>
+
+    <br />
+
+    <div class="col-md-4 offset-md-4">
+        <input class="form-control" type="text" name="CorrectAnswer" value="@Model.CorrectAnswer" placeholder="Correct Answer" />
+        <input class="form-control" type="text" name="IncorrectAnswer1" value="@Model.IncorrectAnswer1" placeholder="Incorrect Answer" />
+        <input class="form-control" type="text" name="IncorrectAnswer2" value="@Model.IncorrectAnswer2" placeholder="Incorrect Answer" />
+        <input class="form-control" type="text" name="IncorrectAnswer3" value="@Model.IncorrectAnswer3" placeholder="Incorrect Answer" />
+    </div>
+
+    <div class="col-md-4 offset-md-4">
+        <input class="btn btn-success btn-block" type="submit" value="Save Changes" />
+    </div>
 </form>
 
