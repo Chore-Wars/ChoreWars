@@ -5,7 +5,6 @@ namespace Chore_Wars.Models
 {
     public partial class Player
     {
-        public Player() { }
 
         public int UserId { get; set; }
         public int? HouseholdId { get; set; }

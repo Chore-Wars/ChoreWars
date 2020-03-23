@@ -17,6 +17,7 @@ namespace Chore_Wars.Controllers
         private readonly ChoreWarsDbContext _context;
         private readonly Helper _helper;
         private readonly IHttpContextAccessor _contextAccessor;
+
         public QuestionController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
@@ -207,16 +208,6 @@ namespace Chore_Wars.Controllers
                 _context.SaveChanges();
             }
             return RedirectToAction("ViewQuestions");
-        }
-        public IActionResult DeleteChore(int id)
-        {
-            Chore Found = _context.Chore.Find(id);
-            if (Found != null)
-            {
-                _context.Chore.Remove(Found);
-                _context.SaveChanges();
-            }
-            return RedirectToAction("ViewChores");
         }
 
         public IActionResult ViewQuestions()
