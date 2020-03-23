@@ -11,5 +11,9 @@ namespace Chore_Wars.ViewModels
         public List<Player> Players { get; set; }
 
         public List<Chore> Chores { get; set; }
+
+        public Player LoggedInPlayer { get; set; }
+
+        public string UserAssignedTo { get; set; }
     }
 }

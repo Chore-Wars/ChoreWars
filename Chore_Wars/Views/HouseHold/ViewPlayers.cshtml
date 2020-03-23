@@ -3,18 +3,51 @@
     ViewData["Title"] = "ViewPlayers";
 }
 
+    <style>
+        body {
+            background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
 
-<h1>View Players</h1>
+        #viewPlayersHeader {
+            text-align: center;
+            font-style: oblique;
+            color: #ff6a00;
+            background-color: black;
+            font-weight: 900;
+        }
+
+        #deleteButton {
+            border-radius: 4px;
+            
+        }
+    </style>
+
+
+<h1 id="viewPlayersHeader">Current Players</h1>
 
 @model List<Player>
 
-@foreach (var player in Model)
-{
-    <p>@player.FirstName </p>
-    <p>@player.LastName</p>
-    <p>Current Points: @player.CurrentPoints</p>
-    <p>Total Points: @player.TotalPoints</p>
-    <p>Incorrect Answers: @player.IncorrectAnswers</p>
-    <p><a href="../Household/LoginPlayer?id=@player.UserId">Log in as this user</a></p>
-    <p><a href="../Player/DeletePlayer?id=@player.UserId">Delete Player</a></p>
-}
+<table class="table" style="color:#ff6a00; font-weight:500; background-color:WindowText">
+    <tr style="font-weight:900">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Current Points</th>
+        <th>Total Earned Points</th>
+        <th>Incorrect Answers</th>
+    </tr>
+
+    @foreach (var player in Model)
+    {
+<tr>
+    <td>@player.FirstName </td>
+    <td>@player.LastName</td>   
+    <td>@player.CurrentPoints</td>
+    <td>@player.TotalPoints</td>
+    <td>@player.IncorrectAnswers</td>
+    <td><a href="../Household/LoginPlayer?id=@player.UserId" class="btn-success">Log in as this user</a></td>
+    <td><a id="deleteButton "href="../Player/DeletePlayer?id=@player.UserId" class="btn-danger">Delete Player</a></td>
+</tr>
+    }
+    </table>

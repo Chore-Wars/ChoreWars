@@ -3,14 +3,14 @@ using System.Linq;
 using System.Security.Claims;
 using Chore_Wars.Models;
 using Chore_Wars.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 namespace Chore_Wars.Controllers
 {
+    [Authorize]
     public class ChoreController : Controller
     {
-
-
         private readonly ChoreWarsDbContext _context;
         private readonly Helper _helper;
         private readonly IHttpContextAccessor _contextAccessor;
@@ -24,11 +24,23 @@ namespace Chore_Wars.Controllers
         //display chores in table
         public IActionResult ViewChores()
         {
-            ViewModelPlayerChore playerChore = new ViewModelPlayerChore();
-            playerChore.Chores = (_context.Chore.ToList());
+            Helper helper = new Helper(_contextAccessor);
+            var player = helper.PopulateFromSession();
+            var foundPlayer = _context.Player.Find(player.UserId);
 
             string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            playerChore.Players = _context.Player.Where(x => x.PlayerStr1 == aspId).ToList();
+            
+            ViewModelPlayerChore playerChore = new ViewModelPlayerChore();
+
+            playerChore.LoggedInPlayer = foundPlayer;
+            //playerChore.UserAssignedTo = (_context.Player.Where(x => x.FirstName == _context.Chore.Where(j => j.UserId ==)));
+
+
+            //playerChore.Chores = (_context.Chore.ToList());
+            playerChore.Chores = (_context.Chore.Where(x => x.ChoreStr1 == aspId).ToList());
+
+            playerChore.Players = _context.Player.Where (x => x.PlayerStr1 == aspId).ToList();
+            //List<Chore> thisHouseholdsChores = _context.Chore.Where(x => x.ChoreStr1 == aspId).ToList();
 
             return View(playerChore);
         }
@@ -43,6 +55,9 @@ namespace Chore_Wars.Controllers
         [HttpPost]
         public IActionResult AddChore(Chore newChore)
         {
+            
+            newChore.ChoreStr1 = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             if (ModelState.IsValid)
             {
                 _context.Chore.Add(newChore);
