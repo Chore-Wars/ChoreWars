@@ -14,8 +14,11 @@
             <td>@question.Category</td>
             <td>@question.Difficulty</td>
             <td>@question.Question1</td>
-            <td>@question.CorrectAnswer</td>
-            <td>@question.IncorrectAnswer1</td>
+            <td><a href="../Question/EditQuestion?id=@question.QuestionId">Edit</a></td>
+            <td><a href="../Question/DeleteQuestion?id=@question.QuestionId">Delete</a></td>
         </tr>
     }
 </table>
+<form action="../Question/AddQuestion" method="get">
+    <input class="btn btn-primary" type="submit" value="Add A Question" />
+</form>

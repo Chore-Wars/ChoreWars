@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=linux,macos,csharp,windows,visualstudio
 
 *appsettings.json
+*appsettings.Development.json
 
 ### Csharp ###
 ## Ignore Visual Studio temporary files, build results, and

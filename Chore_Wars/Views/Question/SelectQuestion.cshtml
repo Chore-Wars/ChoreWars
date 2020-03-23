@@ -21,6 +21,10 @@
     <input type="submit" name="difficulty" value="medium" />
     <input type="submit" name="difficulty" value="hard" />
 </form>
+<form action="../Question/SelectQuestion" method="post">
+    <input type="hidden" name="apiOrCustom" value="custom" />
+    <input type="submit"  value="Get Random Household Question" />
+</form>
 
 
 <h1 style="background-color:DodgerBlue;">@Model.FirstName @Model.LastName Stats</h1>

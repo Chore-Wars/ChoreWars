@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "GetQuestion";
+    ViewData["Title"] = "GetQuestion2";
 }
 
 @using Chore_Wars.ViewModels;
@@ -32,12 +32,12 @@
     <form action="../Question/Result" method="post">
         <label for="1">@shuffledAnswers[0]</label>
         <input id="1" type="radio" name="selection" value="@shuffledAnswers[0]" /><br />
-        <label for="2">@shuffledAnswers[1]</label>
-        <input id="2" type="radio" name="selection" value="@shuffledAnswers[1]" /><br />
-        <label for="3">@shuffledAnswers[2]</label>
-        <input id="3" type="radio" name="selection" value="@shuffledAnswers[2]" /><br />
-        <label for="4">@shuffledAnswers[3]</label>
-        <input id="4" type="radio" name="selection" value="@shuffledAnswers[3]" /><br />
+        <label for="1">@shuffledAnswers[1]</label>
+        <input id="1" type="radio" name="selection" value="@shuffledAnswers[1]" /><br />
+        <label for="1">@shuffledAnswers[2]</label>                          
+        <input id="1" type="radio" name="selection" value="@shuffledAnswers[2]" /><br />
+        <label for="1">@shuffledAnswers[3]</label>                          
+        <input id="1" type="radio" name="selection" value="@shuffledAnswers[3]" /><br />
 
 
         <input type="hidden" name="answer" value="@Model.CustomQuestion.CorrectAnswer" />

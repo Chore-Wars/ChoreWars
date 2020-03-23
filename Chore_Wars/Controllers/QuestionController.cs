@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Chore_Wars.Models;
+using Chore_Wars.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,6 +17,7 @@ namespace Chore_Wars.Controllers
         private readonly ChoreWarsDbContext _context;
         private readonly Helper _helper;
         private readonly IHttpContextAccessor _contextAccessor;
+
         public QuestionController(ChoreWarsDbContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
@@ -34,16 +36,11 @@ namespace Chore_Wars.Controllers
         [HttpPost]
         public IActionResult SelectQuestion(string difficulty, string category, string apiOrCustom)
         {
-            //Helper helper = new Helper(_contextAccessor);
-            //var player = helper.PopulateFromSession();
             TempData["difficulty"] = difficulty;
             TempData["category"] = category;
-
-            //change this line to   = apiOrCustom
-            TempData["apiOrCustom"] = "api";
-            //get custom question button guy logic
+            TempData["apiOrCustom"] = apiOrCustom;
             return RedirectToAction("GetQuestion", "Question");
-        }
+        }      
 
         public async Task<IActionResult> GetQuestion()
         {
@@ -51,18 +48,22 @@ namespace Chore_Wars.Controllers
             var loadDifficulty = TempData["difficulty"];
             var loadCategory = TempData["category"];
             var loadAPIorCustom = TempData["apiOrCustom"];
-
-            if(loadAPIorCustom.ToString() == "custom")
+            
+            //defaults to calling api questions if tempdata is lost
+            if(loadAPIorCustom == null)
+            {
+                loadAPIorCustom = "api";
+            }
+            if (loadAPIorCustom.ToString() == "custom")
             {
                 string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var questions = _context.Question.Where(x => x.QuestionStr1 == aspId).ToList();
 
                 //1) find a way to randomize the question pulled from the Db
+                //int indexOffset = 1;
                 Random random = new Random();
-                int indexOffset = 1;
-                int countQuestions = _context.Question.Count(x => x.QuestionStr1 == aspId);                
-                int myRandom = random.Next(0, countQuestions);
-                Question getQuestion = questions[myRandom];
+                int myRandom = random.Next(0, questions.Count);
+                ViewModelQuestions getQuestion = new ViewModelQuestions(questions[myRandom]);
 
                 //2) randomize the order of the answers
                 return View(getQuestion);
@@ -70,7 +71,7 @@ namespace Chore_Wars.Controllers
             //need a way to ask "is this an API question, or a custom question"
             else
             {
-                var question = await GetAPIQuestion(loadDifficulty, loadCategory);
+                ApiQuestion question = await GetAPIQuestion(loadDifficulty, loadCategory);
                 //mixes up answers and assigns them to the all_answers property (see ApiQuestion class)
                 question.results[0].ScrambleAnswers(question.results[0].correct_answer, question.results[0].incorrect_answers);
 
@@ -87,11 +88,13 @@ namespace Chore_Wars.Controllers
                 {
                     question.results[0].point_value = 8;
                 }
-                return View(question);
+                ViewModelQuestions getQuestion = new ViewModelQuestions();
+                getQuestion.ApiQuestion = question;
+
+                return View(getQuestion);
             }
-
-
         }
+
 
         public async Task<ApiQuestion> GetAPIQuestion(Object tDifficulty, Object tCategory)
         {
@@ -163,6 +166,50 @@ namespace Chore_Wars.Controllers
             return RedirectToAction("ViewQuestions");
         }
 
+        [HttpGet]
+        public IActionResult EditQuestion(int id)
+        {
+            Question found = _context.Question.Find(id);
+            if (found != null)
+            {
+                return View(found);
+            }
+            return RedirectToAction("ViewQuestions");
+        }
+
+        [HttpPost]
+        public IActionResult EditQuestion(Question editedQuestion)
+        {
+            Question dbQuestion = _context.Question.Find(editedQuestion.QuestionId);
+            if (ModelState.IsValid)
+            {
+                dbQuestion.Category = editedQuestion.Category;
+                dbQuestion.Difficulty = editedQuestion.Difficulty;
+                dbQuestion.PointValue = editedQuestion.PointValue;
+                dbQuestion.Question1 = editedQuestion.Question1;
+                dbQuestion.CorrectAnswer = editedQuestion.CorrectAnswer;
+                dbQuestion.IncorrectAnswer1 = editedQuestion.IncorrectAnswer1;
+                dbQuestion.IncorrectAnswer2 = editedQuestion.IncorrectAnswer2;
+                dbQuestion.IncorrectAnswer3 = editedQuestion.IncorrectAnswer3;
+
+                _context.Entry(dbQuestion).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _context.Update(dbQuestion);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ViewQuestions");
+        }
+
+        public IActionResult DeleteQuestion(int id)
+        {
+            Question found = _context.Question.Find(id);
+            if (found != null)
+            {
+                _context.Question.Remove(found);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ViewQuestions");
+        }
+
         public IActionResult ViewQuestions()
         {
             //go get the custom questions from household(ASPNETUSER), and send over a list of them
@@ -172,13 +219,7 @@ namespace Chore_Wars.Controllers
             return View(foundQuestions);
         }
 
-        public IActionResult TestView()
-        {
-            Helper helper = new Helper(_contextAccessor);
-            var player = helper.PopulateFromSession();
-
-            return View();
-        }
+        
 
         //build a method for customizing api calls
         //based on CATEGORY && DIFFICULTY
