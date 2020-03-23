@@ -13,26 +13,35 @@
         #addChoreHeader {
             text-align: center;
             font-style: oblique;
-            color: #572182;
+            color: #b200ff;
             background-color: black;
             font-weight: 900;
         }
         
         #addChoreForm {
-            text-align: justify;
-            color: #572182;
+            text-align: center;
+            color: #b200ff;
             columns: auto;
             font-weight: 900;
+
+        }
+
+        #addChoreDiv {
+            margin: 0;
+            padding: 0;
         }
     </style>
+
 <h1 id="addChoreHeader"><u>Add Chore</u></h1>
 
-<form id="addChoreForm" action="../Chore/AddChore" method="post" style="background-color:WindowFrame" class="col-4">
-    <br /><br />
-    Name: <input type="text" name="ChoreName" placeholder="Name" /><br /><br />
-    Description: <input type="text" name="ChoreDescription" placeholder="Description" /><br /><br />
-    Point Value: <input type="number" min="1" max="10" name="PointValue" required /><br /><br />
-    Due Date: <input type="date" name="DueDate" required /><br /><br />
-    <input type="submit" value="Add Chore!" class="btn-success" />
-    <br /><br />
-</form>
+<div id="addChoreDiv">
+    <form id="addChoreForm" action="../Chore/AddChore" method="post" style="background-color:WindowFrame" class="col-md-4, text-center">
+        <br /><br />
+        Name: <input type="text" name="ChoreName" placeholder="Name" /><br /><br />
+        Description: <input type="text" name="ChoreDescription" placeholder="Description" /><br /><br />
+        Point Value: <input type="number" min="1" max="10" name="PointValue" required /><br /><br />
+        Due Date: <input type="date" name="DueDate" required /><br /><br />
+        <input type="submit" value="Add Chore!" class="btn-success" />
+        <br /><br />
+    </form>
+</div>
