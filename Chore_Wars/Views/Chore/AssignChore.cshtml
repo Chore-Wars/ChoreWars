@@ -2,17 +2,81 @@
 @{
     ViewData["Title"] = "AssignChore";
 }
-@model Chore
 
-<h1>Assign Chore</h1>
 
-<form action="../Chore/AssignChore" method="post">
+@using Chore_Wars.ViewModels;
 
-    @*<input type="type" name="name" value="" />
-    <input type="type" name="name" value="" />
-    <input type="type" name="name" value="" />
-    <input type="type" name="name" value="" />*@
+@model ViewModelPlayerChore
 
-    @*<input type="number" name="points" value="@Model.results[0].point_value" />*@
+<style>
+    body {
+        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
 
-</form>
+    #choreListHeader {
+        text-align: center;
+        font-style: oblique;
+        color: gold;
+        background-color: black;
+        font-weight: 900;
+    }
+
+    #choreTable {
+        font-weight: 500;
+    }
+</style>
+
+
+<h1 id="choreListHeader"><u>Your Chore List</u></h1>
+<p style="background-color:WindowFrame" class="col-4">@Model.LoggedInPlayer.FirstName Currently has @Model.LoggedInPlayer.CurrentPoints points.</p>
+
+<div id="choreTable">
+
+    <table class="table" style="color:gold; background-color:WindowText">
+        <tr style="font-weight:900">
+            <th>Player Name</th>
+            <th>Chore Name</th>
+            <th>Description</th>
+            <th>Point Value</th>
+            <th>Due Date</th>
+        </tr>
+
+        @{var choreList = Model.Chores; }
+        @{var playerList = Model.Players;}
+
+
+        @foreach (Chore chore in choreList)
+        {
+            <tr>
+                <td>
+                    @foreach (Player player in playerList)
+                    //foreach member of household add a selection to dropdown list
+                    {
+
+                        <form action="../Chore/AssignChore?choreId=@chore.ChoreId&userId=@player.UserId&points=@chore.PointValue" method="post">
+                            <input type="submit" value="@player.FirstName" />
+                        </form>
+                    }
+                </td>
+
+                }
+
+
+
+                <td>@chore.ChoreName</td>
+                <td>@chore.ChoreDescription</td>
+                <td>@chore.PointValue</td>
+
+                @{DateTime myDate = (DateTime)chore.DueDate;
+                }
+
+                <td>@myDate.ToShortDateString()</td>
+                <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
+                <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
+
+            </tr>
+        }
+    </table>
+</div>

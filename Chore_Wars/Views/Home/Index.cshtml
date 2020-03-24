@@ -29,17 +29,24 @@
 
 
 
+<h1 id="choreWarsHeader">WELCOME TO CHORE WARS!</h1>
 
-<h1 id="choreWarsHeader"><u>WELCOME TO CHORE WARS!</u></h1>
 
 <br />
 
 @if (User.Identity.IsAuthenticated)
 {
-    <h3 id="choosePlayer"><u>CHOOSE YOUR PLAYER</u></h3>
+    <h3 id="choosePlayer">CHOOSE YOUR PLAYER</h3>
     @foreach (var player in Model)
     {
-        <p class="text-center"><a href="../Home/LoginPlayer?id=@player.UserId" id="playerLink">@player.FirstName @player.LastName</a></p>
+<div class="text-center">
+    <p class="text-center"><a class="btn btn-primary" href="../Home/LoginPlayer?id=@player.UserId" id="playerLink">@player.FirstName @player.LastName</a></p>
+</div>
     }
+<div class="text-center">
+    <a class="btn btn-primary" href="../Household/AddNewPlayer">+</a>
+</div>
+
+
 }
 

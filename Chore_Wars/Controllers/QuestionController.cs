@@ -27,10 +27,17 @@ namespace Chore_Wars.Controllers
         [HttpGet]
         public IActionResult SelectQuestion()
         {
+            //find session player
             Helper helper = new Helper(_contextAccessor);
             var player = helper.PopulateFromSession();
             var foundPlayer = _context.Player.Find(player.UserId);
-            return View(foundPlayer);
+
+            //setup ViewModel object, then sets relevant properties
+            ViewModelPlayerChore myPlayerChore = new ViewModelPlayerChore();
+            myPlayerChore.LoggedInPlayer = foundPlayer;
+            myPlayerChore.Chores = _context.Chore.Where(x => x.UserId == foundPlayer.UserId).ToList();
+
+            return View(myPlayerChore);
         }
 
         [HttpPost]
@@ -58,6 +65,9 @@ namespace Chore_Wars.Controllers
             {
                 string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var questions = _context.Question.Where(x => x.QuestionStr1 == aspId).ToList();
+
+                //if (questions == null)
+                //{ return RedirectToAction("Error") }
 
                 //1) find a way to randomize the question pulled from the Db
                 //int indexOffset = 1;
@@ -94,7 +104,6 @@ namespace Chore_Wars.Controllers
                 return View(getQuestion);
             }
         }
-
 
         public async Task<ApiQuestion> GetAPIQuestion(Object tDifficulty, Object tCategory)
         {

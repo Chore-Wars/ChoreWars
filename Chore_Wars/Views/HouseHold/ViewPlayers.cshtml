@@ -5,22 +5,19 @@
 
     <style>
         body {
-            background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
+            background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
             background-repeat: no-repeat;
             background-size: 100% 100%;
         }
 
         #viewPlayersHeader {
             text-align: center;
-            font-style: oblique;
-            color: #ff6a00;
-            background-color: black;
-            font-weight: 900;
+            color: gold;
+            font-weight: 900
         }
 
         #deleteButton {
             border-radius: 4px;
-            
         }
     </style>
 
@@ -29,7 +26,7 @@
 
 @model List<Player>
 
-<table class="table" style="color:#ff6a00; font-weight:500; background-color:WindowText">
+<table class="table" style="color:gold; font-weight:500;">
     <tr style="font-weight:900">
         <th>First Name</th>
         <th>Last Name</th>
@@ -46,8 +43,13 @@
     <td>@player.CurrentPoints</td>
     <td>@player.TotalPoints</td>
     <td>@player.IncorrectAnswers</td>
-    <td><a href="../Household/LoginPlayer?id=@player.UserId" class="btn-success">Log in as this user</a></td>
-    <td><a id="deleteButton "href="../Player/DeletePlayer?id=@player.UserId" class="btn-danger">Delete Player</a></td>
+    <td><a href="../Household/LoginPlayer?id=@player.UserId" class="btn btn-primary">Log in as this user</a></td>
+    <td><a id="deleteButton "href="../Player/DeletePlayer?id=@player.UserId" class="btn btn-danger">Delete Player</a></td>
 </tr>
     }
     </table>
+<br />
+
+<div class="text-center">
+    <a class="btn-success" href="../Household/AddNewPlayer"> Add New Player! </a>
+</div>

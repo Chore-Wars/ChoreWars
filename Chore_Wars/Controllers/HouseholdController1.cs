@@ -73,7 +73,7 @@ namespace Chore_Wars.Controllers
             
             _context.Player.Add(newPlayer);
             _context.SaveChanges();
-            return RedirectToAction("ViewPlayers");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
