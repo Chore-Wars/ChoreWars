@@ -67,7 +67,7 @@ namespace Chore_Wars.Controllers
                 var questions = _context.Question.Where(x => x.QuestionStr1 == aspId).ToList();
 
                 //if (questions == null)
-                //{ return RedirectToAction("Error") }
+                //{ return RedirectToAction("Chore", "ErrorPage") }
 
                 //1) find a way to randomize the question pulled from the Db
                 //int indexOffset = 1;

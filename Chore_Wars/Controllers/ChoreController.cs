@@ -21,18 +21,12 @@ namespace Chore_Wars.Controllers
             _contextAccessor = contextAccessor;
         }
 
-        //display chores in table
+        //display chores in table. view allows player to assign chores to others
         public IActionResult ViewChores()
         {
-            Helper helper = new Helper(_contextAccessor);
-            var player = helper.PopulateFromSession();
-            var foundPlayer = _context.Player.Find(player.UserId);
-
             string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             
             ViewModelPlayerChore playerChore = new ViewModelPlayerChore();
-
-            playerChore.LoggedInPlayer = foundPlayer;
 
             //gets list of chores in Household
             playerChore.Chores = (_context.Chore.Where(x => x.ChoreStr1 == aspId).ToList());
@@ -41,6 +35,29 @@ namespace Chore_Wars.Controllers
             playerChore.Players = _context.Player.Where (x => x.PlayerStr1 == aspId).ToList();
             return View(playerChore);
         }
+
+        //will become the new top-level link
+        //this should not allow user to assign chores to other b/c it's a top-level view
+        public IActionResult BuyChores()
+        {
+            Helper helper = new Helper(_contextAccessor);
+            var player = helper.PopulateFromSession();
+            var foundPlayer = _context.Player.Find(player.UserId);
+
+            string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            ViewModelPlayerChore playerChore = new ViewModelPlayerChore();
+
+            playerChore.LoggedInPlayer = foundPlayer;
+
+            //gets list of chores in Household
+            playerChore.Chores = (_context.Chore.Where(x => x.ChoreStr1 == aspId).ToList());
+
+            //gets a list of players in the Household
+            playerChore.Players = _context.Player.Where(x => x.PlayerStr1 == aspId).ToList();
+            return View(playerChore);
+        }
+
 
         //add chores to database    
         [HttpGet]
@@ -107,6 +124,7 @@ namespace Chore_Wars.Controllers
 
 
 
+
         //assign chores to player. subtract points
         //take in choreId to assign it
         //take in userId to assign it to that person
@@ -130,6 +148,8 @@ namespace Chore_Wars.Controllers
             //assign chore based on userId
             var assignedChore = _context.Chore.Find(choreId);
             var assignedPlayer = _context.Player.Find(userId);
+
+            assignedChore.UserId = assignedPlayer.UserId;
 
             //update and save assigned chore with the player
             _context.Entry(assignedChore).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

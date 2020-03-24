@@ -28,33 +28,13 @@
 </style>
 
 
-<h1 id="choreListHeader"><u>Your Chore List</u></h1>
-
-<div class="container" style="color:#00ff21">
-    <div class="row">
-        <div class="col-md-2">
-            Player Name
-        </div>
-        <div class="col-md-2">
-            Chore Name
-        </div>
-        <div class="col-md-2">
-            Description
-        </div>
-        <div class="col-md-2">
-            Point Value
-        </div>
-        <div class="col-md-2">
-            Due Date
-        </div>
-    </div>
-</div>
+<h1 id="choreListHeader"><u>Chore List</u></h1>
 
 
 <div id="choreTable">
     <table class="table" style="color:#0ebb18; background-color:WindowText">
         <tr style="font-weight:900">
-            <th>Player Name</th>
+            <th>Assigned To</th>
             <th>Chore Name</th>
             <th>Description</th>
             <th>Point Value</th>
@@ -62,7 +42,7 @@
         </tr>
 
         @{var choreList = Model.Chores; }
-        @{ var playerList = Model.Players;}
+        @{var playerList = Model.Players;}
 
         @foreach (Chore chore in choreList)
         {
@@ -70,7 +50,7 @@
                 <td>
                     @if(chore.UserId == null)
                     {
-                        <a href="../Chore/AssignChore">Assign Chore</a>
+                    <span style="color:gold">Unassigned</span>
                     }
                     else
                     {
@@ -93,8 +73,8 @@
                 }
 
                 <td>@myDate.ToShortDateString()</td>
-                <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
-                <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
+                <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn btn-danger">Delete Chore </a></td>
+                <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn btn-info">Edit Chore </a></td>
 
             </tr>
         }
@@ -103,5 +83,5 @@
 <br />
 
 <div class="text-center">
-    <a href="../Chore/AddChore" class="btn-success">Add New Chore!</a>
+    <a href="../Chore/AddChore" class="btn btn-success">Add New Chore!</a>
 </div>
