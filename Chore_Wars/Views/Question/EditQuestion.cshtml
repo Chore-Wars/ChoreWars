@@ -5,7 +5,7 @@
 
 <style>
     body {
-        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+        background-image: url(https://i.imgur.com/FPbs9yo.jpg);
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
@@ -25,16 +25,18 @@
 <form action="../Question/EditQuestion" method="post">
     <input type="hidden" name="QuestionId" value="@Model.QuestionId" />
     @*UNUSED <input type="text" name="Category" value="@Model.Category" placeholder="Category" />*@
+
+
+    <div class="col-md-4 offset-md-4">
+        <input class="form-control" type="number" name="PointValue" value="@Model.PointValue" placeholder="Point Value" min="1" max="100" required />
+    </div>
+
     <div class="col-md-4 offset-md-4">
         <select class="form-control" name="Difficulty">
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
-    </div>
-
-    <div class="col-md-4 offset-md-4">
-        <input class="form-control" type="number" name="PointValue" value="@Model.PointValue" placeholder="Point Value" min="1" max="100" required />
     </div>
 
     <br />

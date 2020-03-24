@@ -7,7 +7,7 @@
 
 <style>
     body {
-        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+        background-image: url(https://i.imgur.com/FPbs9yo.jpg);
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
@@ -21,22 +21,29 @@
 
 <h1 id="choreWarsHeader">Select Question</h1>
 
-
 <div>
     <form action="../Question/SelectQuestion" method="post">
-        <div class="col-md-4 offset-md-4">
-            Category:<select class="form-control" name="category">
-                <option value="10">Books</option>
-                <option value="15">Video Games</option>
-            </select>
-        </div>
-
-        <div class="col-md-4 offset-md-4 text-center">
-            <div class="btn-group">
-                <input class=" btn btn-success" type="submit" name="difficulty" value="easy" />
-                <input class=" btn btn-warning" type="submit" name="difficulty" value="medium" />
-                <input class=" btn btn-danger " type="submit" name="difficulty" value="hard" />
+            <div class="col-md-4 offset-md-4">
+                <select class="form-control" name="category">
+                    <option value="10">Books</option>
+                    <option value="13">Theatre</option>
+                    <option value="17">Science & Nature</option>
+                    <option value="18">Computers</option>
+                    <option value="19">Math</option>
+                    <option value="20">Mythology</option>
+                    <option value="22">Geography</option>
+                    <option value="22">History</option>
+                    <option value="22">Art</option>
+                    <option value="22">Animals</option>
+                </select>
             </div>
+
+        <div class="col-md-4 offset-md-4 container" style="display:flex; justify-content: space-between">
+
+                <input class=" btn btn-success" style="width:33%" type="submit" name="difficulty" value="easy" />
+                <input class=" btn btn-warning" style="width:33%" type="submit" name="difficulty" value="medium" />
+                <input class=" btn btn-danger " style="width:33%" type="submit" name="difficulty" value="hard" />
+
         </div>
     </form>
 
@@ -45,7 +52,7 @@
     <form action="../Question/SelectQuestion" method="post">
         <div class="col-md-4 offset-md-4 text-center">
             <input type="hidden" name="apiOrCustom" value="custom" />
-            <input class="btn btn-success" type="submit" value="Get Household Question" />
+            <input class="btn btn-primary" type="submit" value="Get Household Question" />
         </div>
     </form>
 </div>
@@ -56,7 +63,7 @@
 <h1 id="choreWarsHeader">@Model.LoggedInPlayer.FirstName's Stats</h1>
 
 <div class="container text-center" style="color:gold">
-    <div class="row">
+    <div class="row offset-md-1">
         <div class="col-2">Current Points:    <b>@Model.LoggedInPlayer.CurrentPoints</b></div>
         <div class="col-2">Total Points:      <b>@Model.LoggedInPlayer.TotalPoints</b></div>
         <div class="col-2">Correct Answers:   <b>@Model.LoggedInPlayer.CorrectAnswers</b></div>
@@ -75,7 +82,7 @@
 <br />
 <br />
 
-<h1 id="choreWarsHeader">@Model.LoggedInPlayer.FirstName's Chores</h1>
+<h1 id="choreWarsHeader" style="background-color:WindowText">@Model.LoggedInPlayer.FirstName's Chores</h1>
 
 <div class="text-center">
     <table class="table" style="background-color:WindowText; color:gold">

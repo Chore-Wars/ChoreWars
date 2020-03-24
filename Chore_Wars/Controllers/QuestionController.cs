@@ -66,6 +66,9 @@ namespace Chore_Wars.Controllers
                 string aspId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var questions = _context.Question.Where(x => x.QuestionStr1 == aspId).ToList();
 
+                //if (questions == null)
+                //{ return RedirectToAction("Error") }
+
                 //1) find a way to randomize the question pulled from the Db
                 //int indexOffset = 1;
                 Random random = new Random();
