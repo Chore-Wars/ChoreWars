@@ -14,6 +14,6 @@ namespace Chore_Wars.ViewModels
 
         public Player LoggedInPlayer { get; set; }
 
-        public Player UserAssignedTo { get; set; }
+        public string UserAssignedTo { get; set; }
     }
 }

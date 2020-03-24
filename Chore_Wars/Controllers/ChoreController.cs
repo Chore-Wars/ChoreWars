@@ -133,7 +133,6 @@ namespace Chore_Wars.Controllers
             //assign chore based on userId
             var assignedChore = _context.Chore.Find(choreId);
             var assignedPlayer = _context.Player.Find(userId);
-            //assignedChore.UserId = assignedPlayer.UserId;
 
             //update and save assigned chore with the player
             _context.Entry(assignedChore).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
