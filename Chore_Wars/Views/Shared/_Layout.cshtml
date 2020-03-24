@@ -37,15 +37,22 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Chore" asp-action="AddChore">Add New Chore!</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Household" asp-action="AddNewPlayer">Add New Player!</a>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Chore" asp-action="AddChore">Add Chore to Household!</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Question" asp-action="ViewQuestions">View Custom Questions!</a>
                             </li>
                         }
+
                     </ul>
                 </div>
             </div>

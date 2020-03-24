@@ -4,21 +4,54 @@
 }
 
 @model List<Question>
+    <style>
+       
+        body {
+            background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
 
+        body {
+            background-color: powderblue;
+        }
+
+        h1 {
+            color: gold;
+        }
+        td{
+            color: gold;
+        }
+        a{
+            color: goldenrod
+        }
+
+        p {
+            color: gold;
+        }
+    </style>
 <h1>View Questions</h1>
+@if (Model.Any())
+{
 
-<table class="table table-bordered">
-    @foreach (Question question in Model)
-    {
-        <tr>
-            <td>@question.Category</td>
-            <td>@question.Difficulty</td>
-            <td>@question.Question1</td>
-            <td><a href="../Question/EditQuestion?id=@question.QuestionId">Edit</a></td>
-            <td><a href="../Question/DeleteQuestion?id=@question.QuestionId">Delete</a></td>
-        </tr>
-    }
-</table>
+
+    <table class="table table-bordered">
+        @foreach (Question question in Model)
+        {
+            <tr>
+                <td>@question.Category</td>
+                <td>@question.Difficulty</td>
+                <td>@question.Question1</td>
+                <td><a href="../Question/EditQuestion?id=@question.QuestionId">Edit</a></td>
+                <td><a href="../Question/DeleteQuestion?id=@question.QuestionId">Delete</a></td>
+            </tr>
+        }
+    </table>
+}
+else  //validation for when there are no questions in place yet
+{
+    <p>Sorry, there are no questions yet!</p>
+}
 <form action="../Question/AddQuestion" method="get">
     <input class="btn btn-primary" type="submit" value="Add A Question" />
 </form>

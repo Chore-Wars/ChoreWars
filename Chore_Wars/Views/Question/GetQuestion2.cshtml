@@ -7,8 +7,6 @@
 
 @model ViewModelQuestions
 
-<h1>GetQuestion2</h1>
-
 
 @if (Model.ApiQuestion == null)
 {
@@ -34,9 +32,9 @@
         <input id="1" type="radio" name="selection" value="@shuffledAnswers[0]" /><br />
         <label for="1">@shuffledAnswers[1]</label>
         <input id="1" type="radio" name="selection" value="@shuffledAnswers[1]" /><br />
-        <label for="1">@shuffledAnswers[2]</label>                          
+        <label for="1">@shuffledAnswers[2]</label>
         <input id="1" type="radio" name="selection" value="@shuffledAnswers[2]" /><br />
-        <label for="1">@shuffledAnswers[3]</label>                          
+        <label for="1">@shuffledAnswers[3]</label>
         <input id="1" type="radio" name="selection" value="@shuffledAnswers[3]" /><br />
 
 
@@ -72,5 +70,4 @@ else
         <input type="submit" />
     </form>
 }
-
 

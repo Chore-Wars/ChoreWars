@@ -101,7 +101,7 @@ namespace Chore_Wars.Controllers
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://opentdb.com/api.php");
             var response = await client.GetAsync($"?amount=1&difficulty={tDifficulty}&category={tCategory}&type=multiple");
-            var question = await response.Content.ReadAsAsync<ApiQuestion>();
+            var question = await response.Content.ReadAsAsync<ApiQuestion>();//try to read as an object of "this" type
 
             return question;
         }
@@ -136,9 +136,9 @@ namespace Chore_Wars.Controllers
                 {
                     foundPlayer.IncorrectAnswers += 1;
 
-                    _context.Entry(foundPlayer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    _context.Update(foundPlayer);
-                    _context.SaveChanges();
+                    _context.Entry(foundPlayer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;    //here
+                    _context.Update(foundPlayer);                                                              //
+                    _context.SaveChanges();                                                                    //here
                 }
                 outcome = "Incorrect :(";
                 return View("Result", outcome);
