@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "BuyChores";
+}
+
+@using Chore_Wars.ViewModels;
+
+@model ViewModelPlayerChore
+
+<style>
+    body {
+        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    #choreListHeader {
+        text-align: center;
+        font-style: oblique;
+        color: #0ebb18;
+        background-color: black;
+        font-weight: 900;
+    }
+
+    #choreTable {
+        font-weight: 500;
+    }
+</style>
+
+
+<h1 id="choreListHeader"><u>Chore List</u></h1>
+
+<h3 style="color:gold; background-color:WindowText">Your Current Points: @Model.LoggedInPlayer.CurrentPoints</h3>
+
+<div id="choreTable">
+    <table class="table" style="color:#0ebb18; background-color:WindowText">
+        <tr style="font-weight:900">
+            <th>Player Name</th>
+            <th>Chore Name</th>
+            <th>Description</th>
+            <th>Point Value</th>
+            <th>Due Date</th>
+        </tr>
+
+        @{var choreList = Model.Chores;}
+        @{var playerList = Model.Players;}
+
+        <!--For each chore in the chorelist, do the following:
+        1) Print out details of the chore
+            1.5) For each member of the household, add to a dropdown button a selection option that displays their name -->
+
+        @foreach (Chore chore in choreList)
+        {
+            @if (chore.UserId == null)
+            {
+                <tr>
+                    <td>
+
+                        @*do the dropdown stuff*@
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @foreach (var player in playerList)
+                                {
+                                    if(player.UserId != Model.LoggedInPlayer.UserId)
+                                    { 
+                                    <a class="dropdown-item" href="../Chore/AssignChore?choreId=@chore.ChoreId&userId=@player.UserId&points=@chore.PointValue">@player.FirstName</a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>@chore.ChoreName</td>
+                    <td>@chore.ChoreDescription</td>
+                    <td>@chore.PointValue</td>
+                    @{DateTime myDate = (DateTime)chore.DueDate;}
+                    <td>@myDate.ToShortDateString()</td>
+                </tr>
+            }
+
+        }
+    </table>
+</div>
+<br />
