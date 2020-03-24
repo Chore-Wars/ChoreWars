@@ -4,27 +4,55 @@
 }
 
 @model Player
+    <style>
+        body {
+            background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
 
-<h1 style="background-color:orange;">SelectQuestion</h1>
+        #choreWarsHeader {
+            text-align: center;
+            color: gold;
+            font-weight: 900
+        }
+
+        #choosePlayer {
+            text-align: center;
+            color: gold;
+            font-weight: 500;
+        }
+
+        #playerLink {
+            color: gold;
+        }
+    </style>
+
+<h1 style="background-color:orange;">Select Question</h1>
 
 
 
+<div class="text-center">
+    <form action="../Question/SelectQuestion" method="post">
+        <div class="text-center">
 
-<form action="../Question/SelectQuestion" method="post">
+        Category:<select class="col-md-4" name="category">
+            <option value="10">Books</option>
+            <option value="15">Video Games</option>
+        </select>
+        </div>
 
-    Category:<select name="category">
-        <option value="10">Books</option>
-        <option value="15">Video Games</option>
-    </select>
+        <input class="btn btn-success" type="submit" name="difficulty" value="easy" />
+        <input class="btn btn-warning" type="submit" name="difficulty" value="medium" />
+        <input class="btn btn-danger" type="submit" name="difficulty" value="hard" />
+    </form>
+    <br />
+    <form action="../Question/SelectQuestion" method="post">
+        <input type="hidden" name="apiOrCustom" value="custom" />
+        <input class="btn btn-success" type="submit" value="Get Random Household Question" />
+    </form>
+</div>
 
-    <input type="submit" name="difficulty" value="easy" />
-    <input type="submit" name="difficulty" value="medium" />
-    <input type="submit" name="difficulty" value="hard" />
-</form>
-<form action="../Question/SelectQuestion" method="post">
-    <input type="hidden" name="apiOrCustom" value="custom" />
-    <input type="submit"  value="Get Random Household Question" />
-</form>
 
 
 <h1 style="background-color:DodgerBlue;">@Model.FirstName @Model.LastName Stats</h1>

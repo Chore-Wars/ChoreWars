@@ -5,36 +5,33 @@
 
     <style>
         body {
-            background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
+            background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
             background-repeat: no-repeat;
             background-size: 100% 100%;
         }
 
         #newPlayerHeader {
             text-align: center;
-            font-style: oblique;
-            color: #ff0000;
-            background-color: black;
-            font-weight: 900;
+            color: gold;
+            font-weight: 900
         }
 
         #newPlayerForm {
             text-align: justify;
-            color: #ff0000;
-            columns:auto;
-            font-weight: 900;
-
+            color: gold;
+            columns: auto;
+            font-weight: 90;
         }
     </style>
 
-<h1 id="newPlayerHeader"><u>Add New Player</u></h1>
+<h1 id="newPlayerHeader"Add New Player</h1>
 
-<form action="../Household/AddNewPlayer" method="post" id="newPlayerForm" style="background-color:WindowFrame" class="col-4">
+<form action="../Household/AddNewPlayer" method="post" id="newPlayerForm" class="col-4">
     <br /><br />
     First Name: <input type="text" name="FirstName" placeholder="First Name" /><br /><br />
     Last Name: <input type="text" name="LastName" placeholder="Last Name" /><br /><br />
     Age: <input type="number" name="Age" placeholder="Age" /><br /><br />
-    <input type="submit" value="Add Player!" class="btn-success"/>
+    <input type="submit" value="Add Player!" class="btn btn-primary"/>
     <br /><br />
 </form>
 
