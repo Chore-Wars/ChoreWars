@@ -119,12 +119,17 @@ namespace Chore_Wars.Controllers
             var foundPlayer = _context.Player.Find(player.UserId);
 
             //subtract from players current points
-            foundPlayer.CurrentPoints = foundPlayer.CurrentPoints - points;
-
+            if (foundPlayer.CurrentPoints > points)
+            {
+                foundPlayer.CurrentPoints = foundPlayer.CurrentPoints - points;
+            }
+            else
+            {
+                return RedirectToAction("ErrorPage");
+            }
             //assign chore based on userId
             var assignedChore = _context.Chore.Find(choreId);
             var assignedPlayer = _context.Player.Find(userId);
-            assignedChore.UserId = assignedPlayer.UserId;
 
             //update and save assigned chore with the player
             _context.Entry(assignedChore).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -136,6 +141,11 @@ namespace Chore_Wars.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("ViewChores");
+        }
+
+        public IActionResult ErrorPage()
+        {
+            return View();
         }
     }
 
