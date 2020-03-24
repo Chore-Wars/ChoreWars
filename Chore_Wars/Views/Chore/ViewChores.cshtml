@@ -9,7 +9,7 @@
 
 <style>
     body {
-        background-image: url(https://img.redbull.com/images/c_crop,x_94,y_0,h_513,w_769/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/05/26/8e9df911-f4d9-48c0-81cf-a7f1a3a01b9a/ultra-street-fighter-2-nintendo-switch);
+        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
@@ -29,70 +29,79 @@
 
 
 <h1 id="choreListHeader"><u>Your Chore List</u></h1>
-<p style="background-color:WindowFrame" class="col-4">Current Points: @Model.LoggedInPlayer.CurrentPoints</p>
 
-    <div id="choreTable">
+<div class="container" style="color:#00ff21">
+    <div class="row">
+        <div class="col-md-2">
+            Player Name
+        </div>
+        <div class="col-md-2">
+            Chore Name
+        </div>
+        <div class="col-md-2">
+            Description
+        </div>
+        <div class="col-md-2">
+            Point Value
+        </div>
+        <div class="col-md-2">
+            Due Date
+        </div>
+    </div>
+</div>
 
-        <table class="table" style="color:#0ebb18; background-color:WindowText">
-            <tr style="font-weight:900">
-                <th>Player Name</th>
-                <th>Chore Name</th>
-                <th>Description</th>
-                <th>Point Value</th>
-                <th>Due Date</th>
-            </tr>
 
-            @{var choreList = Model.Chores; }
-            @{ var playerList = Model.Players;}
+<div id="choreTable">
+    <table class="table" style="color:#0ebb18; background-color:WindowText">
+        <tr style="font-weight:900">
+            <th>Player Name</th>
+            <th>Chore Name</th>
+            <th>Description</th>
+            <th>Point Value</th>
+            <th>Due Date</th>
+        </tr>
 
-            @foreach (Chore chore in choreList)
-            {
-                <tr>
-                    @if (chore.UserId == null)
+        @{var choreList = Model.Chores; }
+        @{ var playerList = Model.Players;}
+
+        @foreach (Chore chore in choreList)
+        {
+            <tr>
+                <td>
+                    @if(chore.UserId == null)
                     {
-                        //setup dropdown list
-
-                        <td>
-                            @foreach (Player player in playerList)
-                            //foreach member of household add a selection to dropdown list
-                            {
-
-                                <form action="../Chore/AssignChore?choreId=@chore.ChoreId&userId=@player.UserId&points=@chore.PointValue" method="post">
-                                    <input type="submit" value="@player.FirstName" />
-                                </form>
-                            }
-                        </td>
+                        <a href="../Chore/AssignChore">Assign Chore</a>
                     }
                     else
                     {
-                        <td>
-                            @Model.UserAssignedTo
-                           
-                                    
-                            
-                            @*<select name="player">
-                                @foreach (Player player1 in playerList)
-                                {
-                                    //print name of player instead on userId
-                                    <option value="@player1.UserId">@player1.FirstName</option>
-                                }
-                            </select>*@
-                        </td>
+                    
+                        foreach (var player in playerList)
+                        {
+                            if (player.UserId == chore.UserId)
+                            {
+                                <p>@player.FirstName</p>
+                            }
+                        }
                     }
+                </td>
 
+                <td>@chore.ChoreName</td>
+                <td>@chore.ChoreDescription</td>
+                <td>@chore.PointValue</td>
 
-                    <td>@chore.ChoreName</td>
-                    <td>@chore.ChoreDescription</td>
-                    <td>@chore.PointValue</td>
+                @{DateTime myDate = (DateTime)chore.DueDate;
+                }
 
-                    @{DateTime myDate = (DateTime)chore.DueDate;
-                    }
+                <td>@myDate.ToShortDateString()</td>
+                <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
+                <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
 
-                    <td>@myDate.ToShortDateString()</td>
-                    <td><a href="../Chore/DeleteChore?id=@chore.ChoreId" class="btn-danger">Delete Chore </a></td>
-                    <td><a href="../Chore/EditChore?id=@chore.ChoreId" class="btn-info">Edit Chore </a></td>
+            </tr>
+        }
+    </table>
+</div>
+<br />
 
-                </tr>
-            }
-        </table>
-    </div>
+<div class="text-center">
+    <a href="../Chore/AddChore" class="btn-success">Add New Chore!</a>
+</div>
