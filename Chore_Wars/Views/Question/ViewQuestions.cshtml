@@ -30,16 +30,15 @@
             color: gold;
         }
     </style>
-<h1>View Questions</h1>
+<h1>Household Questions</h1>
 @if (Model.Any())
 {
 
 
-    <table class="table table-bordered">
+    <table class="table" style="background-color:rgba(0, 0, 0, 0.75)">
         @foreach (Question question in Model)
         {
             <tr>
-                <td>@question.Category</td>
                 <td>@question.Difficulty</td>
                 <td>@question.Question1</td>
                 <td><a href="../Question/EditQuestion?id=@question.QuestionId">Edit</a></td>

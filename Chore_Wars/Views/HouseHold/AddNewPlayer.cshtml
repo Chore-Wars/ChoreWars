@@ -5,7 +5,7 @@
 
     <style>
         body {
-            background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+            background-image: url(https://i.imgur.com/FPbs9yo.jpg);
             background-repeat: no-repeat;
             background-size: 100% 100%;
         }
@@ -27,11 +27,11 @@
     <h1 id="newPlayerHeader">Add New Player</h1>
 
 <div class="col-md-4 offset-4 text-center">
-    <form action="../Household/AddNewPlayer" id="newPlayerForm" method="post"  class="col-4">
+    <form action="../Household/AddNewPlayer" id="newPlayerForm" method="post">
         <br /><br />
-            First Name:<input type="text" name="FirstName" placeholder="First Name" /><br /><br />
-            <span>Last Name:</span> <input type="text" name="LastName" placeholder="Last Name" /><br /><br />
-        <input type="submit" value="Add Player!" class="btn btn-primary"/>
+            First Name:<input class="form-control" type="text" name="FirstName" placeholder="First Name" maxlength="30" /><br /><br />
+            Last Name:<input class="form-control" type="text" name="LastName" placeholder="Last Name" maxlength="30"/><br /><br />
+        <input type="submit" value="Submit!" class="btn btn-success btn-block"/>
         <br /><br />
     </form>
 </div>

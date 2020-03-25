@@ -66,16 +66,20 @@
 <br />
 <br />
 
-<h1 id="choreWarsHeader">@Model.LoggedInPlayer.FirstName's Stats</h1>
+<div class="container col-md-4 offset-md-4" style="background-color:rgba(0, 0, 0, 0.65); border-radius: 25px">
+    <br />
+    <h1 id="choreWarsHeader">@Model.LoggedInPlayer.FirstName's Stats</h1>
 
-<div class="container col-md-4 offset-md-4" style="color:gold">
-    <div class="text-center">
-        <br />
-        <div><b>Current Points:</b>   <h4>@Model.LoggedInPlayer.CurrentPoints</h4></div>
-        <br />
-        <div>Total Points Earned:<b>@Model.LoggedInPlayer.TotalPoints</b></div>
-        <div>Correct Answers:   <b>@Model.LoggedInPlayer.CorrectAnswers</b></div>
-        <div>Incorrect Answers: <b>@Model.LoggedInPlayer.IncorrectAnswers</b></div>
+    <div  style="color:gold">
+        <div class="text-center">
+            <br />
+            <div><b>Current Points:</b>   <h4>@Model.LoggedInPlayer.CurrentPoints</h4></div>
+            <br />
+            <div>Total Points Earned: <b>@Model.LoggedInPlayer.TotalPoints</b></div>
+            <div>Correct Answers:   <b>@Model.LoggedInPlayer.CorrectAnswers</b></div>
+            <div>Incorrect Answers: <b>@Model.LoggedInPlayer.IncorrectAnswers</b></div>
+            <br />
+        </div>
     </div>
 </div>
 

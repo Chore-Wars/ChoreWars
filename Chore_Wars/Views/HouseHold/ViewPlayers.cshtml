@@ -5,7 +5,7 @@
 
     <style>
         body {
-            background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+            background-image: url(https://i.imgur.com/FPbs9yo.jpg);
             background-repeat: no-repeat;
             background-size: 100% 100%;
         }
@@ -26,13 +26,15 @@
 
 @model List<Player>
 
-<table class="table" style="color:gold; font-weight:500;">
+<table class="table" style="color:gold; background-color:rgba(0, 0, 0, 0.75); font-weight:500;">
     <tr style="font-weight:900">
         <th>First Name</th>
         <th>Last Name</th>
         <th>Current Points</th>
         <th>Total Earned Points</th>
         <th>Incorrect Answers</th>
+        <th></th>
+        <th></th>
     </tr>
 
     @foreach (var player in Model)
@@ -48,8 +50,8 @@
 </tr>
     }
     </table>
-<br />
+
 
 <div class="text-center">
-    <a class="btn-success" href="../Household/AddNewPlayer"> Add New Player! </a>
+    <a class="btn btn-success" href="../Household/AddNewPlayer"> Add New Player! </a>
 </div>

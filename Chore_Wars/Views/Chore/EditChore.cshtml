@@ -30,11 +30,11 @@
 <div id="editChoreForm">
     <form action="../Chore/EditChore" method="post" style="color:gold; font-weight:900" class="text-center">
         <input type="hidden" name="ChoreId" value="@Model.ChoreId" /> <br /><br />
-        Name: <input type="text" name="ChoreName" value="@Model.ChoreName" /><br /><br />
-        Description: <input type="text" name="ChoreDescription" value="@Model.ChoreDescription" /><br /><br />
+        Name: <input type="text" name="ChoreName" maxlength="50" value="@Model.ChoreName" /><br /><br />
+        Description: <input type="text" name="ChoreDescription" maxlength="250" value="@Model.ChoreDescription" /><br /><br />
         Point Value: <input type="number" min="1" max="100" name="PointValue" required /><br /><br />
 
-        @{ var myDate = DateTime.Now.ToString("yyyy-mm-dd");}
+        @{ var myDate = DateTime.Now.ToString("yyyy-MM-dd");}
         Due Date: <input type="date" name="DueDate" required min="@myDate" /><br /><br />
 
         <input type="submit" value="Save Changes" class="btn btn-success" />
