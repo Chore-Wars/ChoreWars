@@ -4,38 +4,57 @@
 }
 
 @model List<Question>
-    <style>
-       
-        body {
-            background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
+<style>
 
-        body {
-            background-color: powderblue;
-        }
+    body {
+        background-image: url(https://i.imgur.com/FPbs9yo.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
 
-        h1 {
-            color: gold;
-        }
-        td{
-            color: gold;
-        }
-        a{
-            color: goldenrod
-        }
+    body {
+        background-color: powderblue;
+    }
 
-        p {
-            color: gold;
-        }
-    </style>
+    h1 {
+        color: gold;
+        text-align: center;
+        font-weight: 900;
+    }
+
+    th {
+        color: gold;
+        font-weight: 700;
+    }
+
+    td {
+        color: gold;
+        font-weight: 500;
+    }
+
+    a {
+        color: gold;
+        font-weight: 500;
+    }
+
+    p {
+        text-align:center;
+        color: gold;
+        font-weight: 900;
+    }
+</style>
 <h1>Household Questions</h1>
+
 @if (Model.Any())
 {
-
-
     <table class="table" style="background-color:rgba(0, 0, 0, 0.75)">
+        <tr>
+            <th>Difficulty</th>
+            <th>Question</th>
+            <th></th>
+            <th></th>
+        </tr>
+
         @foreach (Question question in Model)
         {
             <tr>
@@ -51,6 +70,6 @@ else  //validation for when there are no questions in place yet
 {
     <p>Sorry, there are no questions yet!</p>
 }
-<form action="../Question/AddQuestion" method="get">
-    <input class="btn btn-primary" type="submit" value="Add A Question" />
+<form action="../Question/AddQuestion" method="get" class="text-center">
+    <input class="btn btn-primary" type="submit" value="Add A Question!" />
 </form>

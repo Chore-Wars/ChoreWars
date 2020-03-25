@@ -9,44 +9,35 @@
         font-weight: 900;
     }
 
-    #editChoreForm {
+    #addChoreForm {
         text-align: justify;
-        color: #0094ff;
-        columns: auto;
+        color: gold;
         font-weight: 900;
     }
+
+
     body {
         background-image: url(https://i.imgur.com/FPbs9yo.jpg);
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
 
-    body {
-        background-color: powderblue;
-    }
-
-    h1 {
-        color: gold;
-    }
-
-    p {
-        color: gold;
-    }
-    //overflow scroll
-    //
+  
 </style>
 
 <h1 id="addChoreHeader">Add Chore</h1>
 
-<form id="addChoreForm" action="../Chore/AddChore" method="post" style="color:gold; font-weight:900" class="text-center">
-    <br />
-    Name: <input type="text" name="ChoreName" maxlength="50" placeholder="Name" /><br /><br />
-    Description: <input type="text" name="ChoreDescription" maxlength="250" placeholder="Description" /><br /><br />
-    Point Value: <input type="number" min="1" max="100" name="PointValue" required /><br /><br />
+<div class="col-md-4 offset-4 text-center">
+    <form id="addChoreForm" action="../Chore/AddChore" method="post">
+        <br />
+        Name: <input class="form-control" type="text" name="ChoreName" maxlength="50" placeholder="Name" /><br />
+        Description: <input class="form-control" type="text" name="ChoreDescription" maxlength="250" placeholder="Description" /><br />
+        Point Value: <input class="form-control" type="number" min="1" max="100" name="PointValue" required /><br />
 
-    @{ var myDate = DateTime.Now.ToString("yyyy-mm-dd");}
-    Due Date: <input type="date" name="DueDate" required min="@myDate"/><br /><br />
+        @{ var myDate = DateTime.Now.ToString("yyyy-mm-dd");}
+        Due Date: <input class="form-control" type="date" name="DueDate" required min="@myDate" /><br />
 
-    <input type="submit" value="Add Chore!" class=" btn btn-success" />
-    <br /><br />
-</form>
+        <input type="submit" value="Submit!" class="btn btn-success btn-block" />
+        <br />
+    </form>
+    </div>

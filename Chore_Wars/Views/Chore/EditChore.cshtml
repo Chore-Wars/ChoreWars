@@ -7,7 +7,7 @@
 
 <style>
     body {
-        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+        background-image: url(https://i.imgur.com/FPbs9yo.jpg);
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
@@ -27,17 +27,18 @@
 
 <h1 id="editChoreHeader">Edit Chore</h1>
 
-<div id="editChoreForm">
-    <form action="../Chore/EditChore" method="post" style="color:gold; font-weight:900" class="text-center">
-        <input type="hidden" name="ChoreId" value="@Model.ChoreId" /> <br /><br />
-        Name: <input type="text" name="ChoreName" maxlength="50" value="@Model.ChoreName" /><br /><br />
-        Description: <input type="text" name="ChoreDescription" maxlength="250" value="@Model.ChoreDescription" /><br /><br />
-        Point Value: <input type="number" min="1" max="100" name="PointValue" required /><br /><br />
+<div class="col-md-4 offset-4 text-center">
+    <form action="../Chore/EditChore" method="post" id="editChoreForm">
+
+        <input type="hidden" name="ChoreId" value="@Model.ChoreId" /> <br />
+        Name: <input class="form-control" type="text" name="ChoreName" maxlength="50" value="@Model.ChoreName" /><br />
+        Description: <input class="form-control" type="text" name="ChoreDescription" maxlength="250" value="@Model.ChoreDescription" /><br />
+        Point Value: <input class="form-control" type="number" min="1" max="100" name="PointValue" required /><br />
 
         @{ var myDate = DateTime.Now.ToString("yyyy-MM-dd");}
-        Due Date: <input type="date" name="DueDate" required min="@myDate" /><br /><br />
+        Due Date: <input class="form-control" type="date" name="DueDate" required min="@myDate" /><br />
 
-        <input type="submit" value="Save Changes" class="btn btn-success" />
+        <input type="submit" value="Save Changes!" class="btn btn-success btn-block"/>
         <br /><br />
 
     </form>
