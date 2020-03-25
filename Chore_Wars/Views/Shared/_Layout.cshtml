@@ -9,9 +9,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Chore Wars</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3" style="color:gold; background-color:#080f81">
+            <div class="container" style="background-color:#080f81">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img style="width:110px; height:60px" src="https://i.imgur.com/Ng9sr5t.png" alt="Logo" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,33 +21,33 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Household" asp-action="ViewPlayers">View Household Members</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Household" asp-action="ViewPlayers">Household Members!</a>
+                        </li>
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Chore" asp-action="ViewChores">View Chores</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Chore" asp-action="ViewChores">Chores!</a>
+                        </li>
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Chore" asp-action="AddChore">Add New Chore!</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Chore" asp-action="AddChore">Add Chore!</a>
+                        </li>
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Household" asp-action="AddNewPlayer">Add New Player!</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Household" asp-action="AddNewPlayer">Add Player!</a>
+                        </li>
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Question" asp-action="ViewQuestions">View Custom Questions!</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Question" asp-action="ViewQuestions">Custom Questions!</a>
+                        </li>
                         }
 
                     </ul>
@@ -55,6 +55,20 @@
             </div>
         </nav>
     </header>
+    <style>
+        body {
+            background-image: url(https://i.imgur.com/FPbs9yo.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            color:gold;
+            font-weight:900;
+
+        }
+
+
+    </style>
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -62,8 +76,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Chore Wars 
+        <div class="container" style="color:gold">
+            &copy; 2020 - Chore Wars
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
