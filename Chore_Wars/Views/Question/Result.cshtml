@@ -2,11 +2,33 @@
 @{
     ViewData["Title"] = "Result";
 }
+<style>
+    body {
+        background-image: url(https://media.istockphoto.com/vectors/boxing-ring-corner-with-spotlight-vector-id590164568?k=6&m=590164568&s=612x612&w=0&h=KNCe5eCcbRtK0UFaUpAMXask93_CExb_8apYZsH6h_w=);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
 
-<h1>Result</h1>
+    #choreWarsHeader {
+        text-align: center;
+        color: gold;
+        font-weight: 900
+    }
+    #p{
+        color: gold;
+    }
+    #a{
+        color: gold;
+    }
+</style>
+
+
+
+<h1 id="choreWarsHeader">Result</h1>
+
 
 @model string
 
 <p>@Model</p>
 
-<p><a href="../Question/SelectQuestion">Try Again?</a></p>
+<p style="color:gold;"><a href="../Question/SelectQuestion">Try Again?</a></p>
