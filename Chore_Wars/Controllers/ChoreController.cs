@@ -84,13 +84,24 @@ namespace Chore_Wars.Controllers
         //Delete Chore Method
         public IActionResult DeleteChore(int id)
         {
-            Chore Found = _context.Chore.Find(id);
-            if (Found != null)
+            Chore found = _context.Chore.Find(id);
+            if (found != null)
             {
-                _context.Chore.Remove(Found);
+                _context.Chore.Remove(found);
                 _context.SaveChanges();
             }
             return RedirectToAction("ViewChores");
+        }
+
+        public IActionResult CompleteChore(int id)
+        {
+            Chore found = _context.Chore.Find(id);
+            if (found != null)
+            {
+                _context.Chore.Remove(found);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("SelectQuestion", "Question");
         }
 
 
@@ -114,6 +125,7 @@ namespace Chore_Wars.Controllers
                 dbChore.PointValue = editedChore.PointValue;
                 dbChore.ChoreName = editedChore.ChoreName;
                 dbChore.ChoreDescription = editedChore.ChoreDescription;
+                dbChore.DueDate = editedChore.DueDate;
 
                 _context.Entry(dbChore).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 _context.Update(dbChore);
@@ -160,7 +172,7 @@ namespace Chore_Wars.Controllers
             _context.Update(foundPlayer);
             _context.SaveChanges();
 
-            return RedirectToAction("ViewChores");
+            return RedirectToAction("BuyChores");
         }
 
         public IActionResult ErrorPage()

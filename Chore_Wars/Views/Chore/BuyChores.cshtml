@@ -29,7 +29,9 @@
 
 <h1 id="choreListHeader">Chore List</h1>
 
-<h3 style="color:gold; background-color:WindowText">Your Current Points: @Model.LoggedInPlayer.CurrentPoints</h3>
+<div class="text-center">
+    <h3 style="color:gold; background-color:WindowText">Your Current Points: @Model.LoggedInPlayer.CurrentPoints</h3>
+</div>
 
 <div id="choreTable">
     <table class="table" style="color:#0ebb18; background-color:WindowText">
@@ -54,7 +56,6 @@
             {
                 <tr>
                     <td>
-
                         @*do the dropdown stuff*@
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -79,8 +80,10 @@
                     <td>@myDate.ToShortDateString()</td>
                 </tr>
             }
-
         }
     </table>
+
+    <a class="btn btn-primary" href="../Question/SelectQuestion">Return to Home</a>
+
 </div>
 <br />
