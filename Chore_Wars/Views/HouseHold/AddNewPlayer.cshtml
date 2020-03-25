@@ -18,20 +18,20 @@
 
         #newPlayerForm {
             text-align: justify;
-            color: gold;
-            columns: auto;
+            color: gold; 
             font-weight: 900;
         }
     </style>
 
-<h1 id="newPlayerHeader"Add New Player</h1>
 
-<form action="../Household/AddNewPlayer" method="post" style="background-color:WindowFrame" class="col-4">
-    <br /><br />
-    First Name: <input type="text" name="FirstName" placeholder="First Name" /><br /><br />
-    Last Name: <input type="text" name="LastName" placeholder="Last Name" /><br /><br />
-    Age: <input type="number" name="Age" placeholder="Age" /><br /><br />
-    <input type="submit" value="Add Player!" class="btn btn-primary"/>
-    <br /><br />
-</form>
+    <h1 id="newPlayerHeader">Add New Player</h1>
 
+<div class="col-md-4 offset-4 text-center">
+    <form action="../Household/AddNewPlayer" id="newPlayerForm" method="post"  class="col-4">
+        <br /><br />
+            First Name:<input type="text" name="FirstName" placeholder="First Name" /><br /><br />
+            <span>Last Name:</span> <input type="text" name="LastName" placeholder="Last Name" /><br /><br />
+        <input type="submit" value="Add Player!" class="btn btn-primary"/>
+        <br /><br />
+    </form>
+</div>
