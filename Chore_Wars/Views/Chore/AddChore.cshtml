@@ -3,11 +3,9 @@
     ViewData["Title"] = "AddChore";
 }
 <style>
-      #editChoreHeader {
+      #addChoreHeader {
         text-align: center;
-        font-style: oblique;
-        color: #0094ff;
-        background-color: black;
+        color: gold;
         font-weight: 900;
     }
 
@@ -38,14 +36,17 @@
     //
 </style>
 
-<h1 id="addChoreHeader"><u>Add Chore</u></h1>
+<h1 id="addChoreHeader">Add Chore</h1>
 
-<form id="addChoreForm" action="../Chore/AddChore" method="post" style="background-color:WindowFrame" class="col-4">
-    <br /><br />
-    Name: <input type="text" name="ChoreName" maxlength="50"  placeholder="Name" /><br /><br />
+<form id="addChoreForm" action="../Chore/AddChore" method="post" style="color:gold; font-weight:900" class="text-center">
+    <br />
+    Name: <input type="text" name="ChoreName" maxlength="50" placeholder="Name" /><br /><br />
     Description: <input type="text" name="ChoreDescription" maxlength="250" placeholder="Description" /><br /><br />
     Point Value: <input type="number" min="1" max="10" name="PointValue" required /><br /><br />
-    Due Date: <input type="date" name="DueDate" required /><br /><br />
-    <input type="submit" value="Add Chore!" class="btn-success" />
+
+    @{ var myDate = DateTime.Now.ToString("yyyy-mm-dd");}
+    Due Date: <input type="date" name="DueDate" required min="@myDate"/><br /><br />
+
+    <input type="submit" value="Add Chore!" class=" btn btn-success" />
     <br /><br />
 </form>
