@@ -149,7 +149,7 @@ namespace Chore_Wars.Controllers
                     _context.Update(foundPlayer);                                                              //
                     _context.SaveChanges();                                                                    //here
                 }
-                outcome = "Incorrect :(";
+                outcome = $"Incorrect. The correct answer was \"{answer}\"";
                 return View("Result", outcome);
             }
         }

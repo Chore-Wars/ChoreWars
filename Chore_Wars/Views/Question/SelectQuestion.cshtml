@@ -23,20 +23,20 @@
 
 <div>
     <form action="../Question/SelectQuestion" method="post">
-            <div class="col-md-4 offset-md-4">
-                <select class="form-control" name="category">
-                    <option value="10">Books</option>
-                    <option value="13">Theatre</option>
-                    <option value="17">Science & Nature</option>
-                    <option value="18">Computers</option>
-                    <option value="19">Math</option>
-                    <option value="20">Mythology</option>
-                    <option value="22">Geography</option>
-                    <option value="22">History</option>
-                    <option value="22">Art</option>
-                    <option value="22">Animals</option>
-                </select>
-            </div>
+        <div class="col-md-4 offset-md-4">
+            <select class="form-control" name="category">
+                <option value="10">Books</option>
+                <option value="13">Theatre</option>
+                <option value="17">Science & Nature</option>
+                <option value="18">Computers</option>
+                <option value="19">Math</option>
+                <option value="20">Mythology</option>
+                <option value="22">Geography</option>
+                <option value="23">History</option>
+                <option value="25">Art</option>
+                <option value="27">Animals</option>
+            </select>
+        </div>
 
         <div class="col-md-4 offset-md-4 container" style="display:flex; justify-content: space-between">
 
@@ -62,25 +62,32 @@
 
 <h1 id="choreWarsHeader">@Model.LoggedInPlayer.FirstName's Stats</h1>
 
-<div class="container text-center" style="color:gold">
-    <div class="row offset-md-1">
-        <div class="col-2">Current Points:    <b>@Model.LoggedInPlayer.CurrentPoints</b></div>
-        <div class="col-2">Total Points:      <b>@Model.LoggedInPlayer.TotalPoints</b></div>
-        <div class="col-2">Correct Answers:   <b>@Model.LoggedInPlayer.CorrectAnswers</b></div>
-        <div class="col-2">Incorrect Answers: <b>@Model.LoggedInPlayer.IncorrectAnswers</b></div>
-        <div class="col-2">Chores Complete:   <b>@Model.LoggedInPlayer.ChoresComplete</b></div>
+<div class="container col-md-4 offset-md-4" style="color:gold">
+    <div class="text-center">
+        <br />
+        <div><b>Current Points:</b>   <h4>@Model.LoggedInPlayer.CurrentPoints</h4></div>
+        <br />
+        <div>Total Points Earned:<b>@Model.LoggedInPlayer.TotalPoints</b></div>
+        <div>Correct Answers:   <b>@Model.LoggedInPlayer.CorrectAnswers</b></div>
+        <div>Incorrect Answers: <b>@Model.LoggedInPlayer.IncorrectAnswers</b></div>
     </div>
 </div>
 
 <br />
 <br />
 
-<div class="container" style="background-color:WindowText; color:gold">
-    <div class="col-md-4 offset-md-4"><a href="../Chore/BuyChores">BUY CHORES</a></div>
+<div class="container col-md-4 offset-md-4" style="color:gold">
+    <a class="btn btn-info btn-block" href="../Chore/BuyChores">BUY CHORES</a>
+</div>
+<br />
+<div class="container col-md-4 offset-md-4" style="color:gold">
+    <a class="btn btn-secondary btn-block" href="../Home/Index">Logout</a>
 </div>
 
 <br />
 <br />
+
+
 
 <h1 id="choreWarsHeader" style="background-color:WindowText">@Model.LoggedInPlayer.FirstName's Chores</h1>
 
@@ -101,7 +108,7 @@
                     <td>@chore.ChoreName</td>
                     <td>@chore.ChoreDescription</td>
                     <td>@myDate.ToShortDateString()</td>
-                    <td>BUTTON HERE</td>
+                    <td><a href="../Chore/CompleteChore?id=@chore.ChoreId" class="btn btn-success">Complete Chore </a></td>
                 </tr>
             }
         }
