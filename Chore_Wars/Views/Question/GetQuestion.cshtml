@@ -40,19 +40,12 @@ p    {color: gold;}
     <p>Question: @Model.CustomQuestion.Question1</p>
 
     <form action="../Question/Result" method="post">
-        <label for="1">@shuffledAnswers[0]</label>
-        <input id="1" type="radio" name="selection" value="@shuffledAnswers[0]" /><br />
-        <label for="2">@shuffledAnswers[1]</label>
-        <input id="2" type="radio" name="selection" value="@shuffledAnswers[1]" /><br />
-        <label for="3">@shuffledAnswers[2]</label>
-        <input id="3" type="radio" name="selection" value="@shuffledAnswers[2]" /><br />
-        <label for="4">@shuffledAnswers[3]</label>
-        <input id="4" type="radio" name="selection" value="@shuffledAnswers[3]" /><br />
-
-
+        <input id="1" type="submit" name="selection"class="btn btn-success" value="@shuffledAnswers[0]" /><br />
+        <input id="2" type="submit" name="selection" value="@shuffledAnswers[1]" /><br />
+        <input id="3" type="submit" name="selection" class="btn btn-success" value="@shuffledAnswers[2]" /><br />
+        <input id="4" type="submit" name="selection" class="btn btn-success" value="@shuffledAnswers[3]" /><br />
         <input type="hidden" name="answer" value="@Model.CustomQuestion.CorrectAnswer" />
         <input type="hidden" name="points" value="@Model.CustomQuestion.PointValue" />
-        <input type="submit" />
     </form>
 
 }
@@ -65,21 +58,30 @@ else
     <p>@Html.Raw(Model.ApiQuestion.results[0].question)</p>
 
     <form action="../Question/Result" method="post">
-        <label for="1">@Html.Raw(Model.ApiQuestion.results[0].all_answers[0])</label>
-        <input id="1" type="radio" name="selection" value="@Model.ApiQuestion.results[0].all_answers[0]" /><br />
+        <input id="1" type="submit" name="selection"class="btn btn-success" value="@Model.ApiQuestion.results[0].all_answers[0]" /><br />
 
-        <label for="2">@Html.Raw(Model.ApiQuestion.results[0].all_answers[1])</label>
-        <input id="2" type="radio" name="selection" value="@Model.ApiQuestion.results[0].all_answers[1]" /><br />
+        <input id="2" type="submit" name="selection" class="btn btn-success"value="@Model.ApiQuestion.results[0].all_answers[1]" /><br />
 
-        <label for="3">@Html.Raw(Model.ApiQuestion.results[0].all_answers[2])</label>
-        <input type="radio" name="selection" value="@Model.ApiQuestion.results[0].all_answers[2]" /><br />
+        <input type="submit" name="selection"class="btn btn-success" value="@Model.ApiQuestion.results[0].all_answers[2]" /><br />
 
-        <label for="4">@Html.Raw(Model.ApiQuestion.results[0].all_answers[3])</label>
-        <input id="4" type="radio" name="selection" value="@Model.ApiQuestion.results[0].all_answers[3]" /><br />
+        <input id="4" type="submit" name="selection" class="btn btn-success" value="@Model.ApiQuestion.results[0].all_answers[3]" /><br />
 
         <input type="hidden" name="answer" value="@Model.ApiQuestion.results[0].correct_answer" />
         <input type="hidden" name="points" value="@Model.ApiQuestion.results[0].point_value" />
-        <input type="submit" />
+   
+    
+    
+    
+        @*<tr>
+            <td>@player.FirstName </td>
+            <td>@player.LastName</td>
+            <td>@player.CurrentPoints</td>
+            <td>@player.TotalPoints</td>
+            <td>@player.IncorrectAnswers</td>
+            <td><a href="../Household/LoginPlayer?id=@player.UserId" class="btn btn-primary">Log in as this user</a></td>
+            <td><a id="deleteButton " href="../Player/DeletePlayer?id=@player.UserId" class="btn btn-danger">Delete Player</a></td>
+        </tr>*@
+    
     </form>
 }
 
