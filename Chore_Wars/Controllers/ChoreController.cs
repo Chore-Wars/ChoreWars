@@ -125,6 +125,7 @@ namespace Chore_Wars.Controllers
                 dbChore.PointValue = editedChore.PointValue;
                 dbChore.ChoreName = editedChore.ChoreName;
                 dbChore.ChoreDescription = editedChore.ChoreDescription;
+                dbChore.DueDate = editedChore.DueDate;
 
                 _context.Entry(dbChore).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 _context.Update(dbChore);
