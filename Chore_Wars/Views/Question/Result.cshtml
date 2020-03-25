@@ -14,24 +14,24 @@
         color: gold;
         font-weight: 900
     }
-
-    p {
+    #p{
         color: gold;
     }
-
-    a {
+    #a{
         color: gold;
     }
 </style>
 
 
 
-<h1 id="choreWarsHeader">Result</h1>
-
+<h1 id="choreWarsHeader">Result:</h1>
+<br />
 
 @model string
 
-<p>@Model</p>
-
-<button class="btn btn-success" <a href="../Question/SelectQuestion">Try Again?</a></button>
+<div class="text-center">
+    <h3 style="color:gold">@Model</h3>
+    <br />  
+    <p style="color:gold;"><a class="btn btn-primary" href="../Question/SelectQuestion">Try Again?</a></p>
+</div>
 

@@ -13,7 +13,7 @@
     #choreWarsHeader {
         text-align: center;
         color: gold;
-        font-weight: 900
+        font-weight: 900;
     }
 
     #choosePlayer {
@@ -31,22 +31,38 @@
 
 <h1 id="choreWarsHeader">WELCOME TO CHORE WARS!</h1>
 
+<div class="container col-md-6 offset-md-3" role="tablist">
+    <div class="card">
+        <div class="card-header" role="tab">
+            <h5 class="mb-0">
+                <a class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Instructions
+                </a>
+            </h5>
+        </div>
+        <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" style="">
+            <div class="card-body">
+                <p>words here</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<br />
+    
 
-@if (User.Identity.IsAuthenticated)
-{
-    <h3 id="choosePlayer">CHOOSE YOUR PLAYER</h3>
-    @foreach (var player in Model)
+    @if (User.Identity.IsAuthenticated)
     {
-<div class="text-center">
-    <p class="text-center"><a class="btn btn-primary" href="../Home/LoginPlayer?id=@player.UserId" id="playerLink">@player.FirstName @player.LastName</a></p>
-</div>
+        <h3 id="choosePlayer">CHOOSE YOUR PLAYER</h3>
+        @foreach (var player in Model)
+        {
+            <div class="text-center">
+                <p class="text-center"><a class="btn btn-primary" href="../Home/LoginPlayer?id=@player.UserId" id="playerLink">@player.FirstName @player.LastName</a></p>
+            </div>
+        }
+        <div class="text-center">
+            <a class="btn btn-primary" href="../Household/AddNewPlayer">+ Add Player +</a>
+        </div>
+
+
     }
-<div class="text-center">
-    <a class="btn btn-primary" href="../Household/AddNewPlayer">+</a>
-</div>
-
-
-}
 
