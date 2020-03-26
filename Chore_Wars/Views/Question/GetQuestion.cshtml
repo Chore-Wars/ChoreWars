@@ -48,10 +48,10 @@
         <p>Question: @Model.CustomQuestion.Question1</p>
 
         <form action="../Question/Result" method="post">
-            <input id="1" type="submit" name="selection" class="btn btn-primary" value="@shuffledAnswers[0]" /><br />
-            <input id="2" type="submit" name="selection" class="btn btn-primary" value="@shuffledAnswers[1]" /><br />
-            <input id="3" type="submit" name="selection" class="btn btn-primary" value="@shuffledAnswers[2]" /><br />
-            <input id="4" type="submit" name="selection" class="btn btn-primary" value="@shuffledAnswers[3]" /><br />
+            <input id="1" type="submit" name="selection" class="btn btn-primary btn-block" value="@shuffledAnswers[0]" /><br />
+            <input id="2" type="submit" name="selection" class="btn btn-primary btn-block" value="@shuffledAnswers[1]" /><br />
+            <input id="3" type="submit" name="selection" class="btn btn-primary btn-block" value="@shuffledAnswers[2]" /><br />
+            <input id="4" type="submit" name="selection" class="btn btn-primary btn-block" value="@shuffledAnswers[3]" /><br />
             <input type="hidden" name="answer" value="@Model.CustomQuestion.CorrectAnswer" />
             <input type="hidden" name="points" value="@Model.CustomQuestion.PointValue" />
         </form>
@@ -68,13 +68,10 @@ else
         <p>@Html.Raw(Model.ApiQuestion.results[0].question)</p>
 
         <form action="../Question/Result" method="post">
-            <input id="1" type="submit" name="selection" class="btn btn-primary" value="@Model.ApiQuestion.results[0].all_answers[0]" /><br /><br />
-
-            <input id="2" type="submit" name="selection" class="btn btn-primary" value="@Model.ApiQuestion.results[0].all_answers[1]" /><br /><br />
-
-            <input type="submit" name="selection" class="btn btn-primary" value="@Model.ApiQuestion.results[0].all_answers[2]" /><br /><br />
-
-            <input id="4" type="submit" name="selection" class="btn btn-primary" value="@Model.ApiQuestion.results[0].all_answers[3]" /><br /><br />
+            <input id="1" type="submit" name="selection" class="btn btn-primary btn-block" value="@Model.ApiQuestion.results[0].all_answers[0]" /><br />
+            <input id="2" type="submit" name="selection" class="btn btn-primary btn-block" value="@Model.ApiQuestion.results[0].all_answers[1]" /><br />
+            <input type="submit" name="selection" class="btn btn-primary btn-block" value="@Model.ApiQuestion.results[0].all_answers[2]" /><br />
+            <input id="4" type="submit" name="selection" class="btn btn-primary btn-block" value="@Model.ApiQuestion.results[0].all_answers[3]" /><br />
 
             <input type="hidden" name="answer" value="@Model.ApiQuestion.results[0].correct_answer" />
             <input type="hidden" name="points" value="@Model.ApiQuestion.results[0].point_value" />

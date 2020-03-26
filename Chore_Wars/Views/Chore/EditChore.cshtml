@@ -31,7 +31,7 @@
     <form action="../Chore/EditChore" method="post" id="editChoreForm">
 
         <input type="hidden" name="ChoreId" value="@Model.ChoreId" /> <br />
-        Name: <input class="form-control" type="text" name="ChoreName" maxlength="50" value="@Model.ChoreName" /><br />
+        Name: <input class="form-control" type="text" name="ChoreName" maxlength="50" required value="@Model.ChoreName" /><br />
         Description: <input class="form-control" type="text" name="ChoreDescription" maxlength="250" value="@Model.ChoreDescription" /><br />
         Point Value: <input class="form-control" type="number" min="1" max="100" name="PointValue" required /><br />
 

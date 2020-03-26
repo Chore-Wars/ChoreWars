@@ -41,16 +41,16 @@
 
     <br />
     <div class="col-md-4 offset-md-4">
-        <textarea class="form-control" name="Question1" value="@Model.Question1" placeholder="Question Text" maxlength="440">@Model.Question1</textarea>
+        <textarea class="form-control" name="Question1" value="@Model.Question1" placeholder="Question Text" required maxlength="440">@Model.Question1</textarea>
     </div>
 
     <br />
 
     <div class="col-md-4 offset-md-4">
-        <input class="form-control" type="text" name="CorrectAnswer" value="@Model.CorrectAnswer" placeholder="Correct Answer" maxlength="50"/>
-        <input class="form-control" type="text" name="IncorrectAnswer1" value="@Model.IncorrectAnswer1" placeholder="Incorrect Answer" maxlength="50"/>
-        <input class="form-control" type="text" name="IncorrectAnswer2" value="@Model.IncorrectAnswer2" placeholder="Incorrect Answer" maxlength="50"/>
-        <input class="form-control" type="text" name="IncorrectAnswer3" value="@Model.IncorrectAnswer3" placeholder="Incorrect Answer" maxlength="50"/>
+        <input class="form-control" type="text" name="CorrectAnswer" value="@Model.CorrectAnswer" placeholder="Correct Answer" maxlength="50" required/>
+        <input class="form-control" type="text" name="IncorrectAnswer1" value="@Model.IncorrectAnswer1" placeholder="Incorrect Answer" maxlength="50" required/>
+        <input class="form-control" type="text" name="IncorrectAnswer2" value="@Model.IncorrectAnswer2" placeholder="Incorrect Answer" maxlength="50" required/>
+        <input class="form-control" type="text" name="IncorrectAnswer3" value="@Model.IncorrectAnswer3" placeholder="Incorrect Answer" maxlength="50" required/>
     </div>
 
     <div class="col-md-4 offset-md-4">

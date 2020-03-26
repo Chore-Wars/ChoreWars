@@ -30,11 +30,11 @@
 <div class="col-md-4 offset-4 text-center">
     <form id="addChoreForm" action="../Chore/AddChore" method="post">
         <br />
-        Name: <input class="form-control" type="text" name="ChoreName" maxlength="50" placeholder="Name" /><br />
+        Name: <input class="form-control" type="text" name="ChoreName" maxlength="50" required placeholder="Name" /><br />
         Description: <input class="form-control" type="text" name="ChoreDescription" maxlength="250" placeholder="Description" /><br />
         Point Value: <input class="form-control" type="number" min="1" max="100" name="PointValue" required /><br />
 
-        @{ var myDate = DateTime.Now.ToString("yyyy-mm-dd");}
+        @{ var myDate = DateTime.Now.ToString("yyyy-MM-dd");}
         Due Date: <input class="form-control" type="date" name="DueDate" required min="@myDate" /><br />
 
         <input type="submit" value="Submit!" class="btn btn-success btn-block" />

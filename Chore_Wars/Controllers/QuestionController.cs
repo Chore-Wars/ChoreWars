@@ -47,7 +47,7 @@ namespace Chore_Wars.Controllers
             TempData["category"] = category;
             TempData["apiOrCustom"] = apiOrCustom;
             return RedirectToAction("GetQuestion", "Question");
-        }      
+        }
 
         public async Task<IActionResult> GetQuestion()
         {
@@ -55,9 +55,9 @@ namespace Chore_Wars.Controllers
             var loadDifficulty = TempData["difficulty"];
             var loadCategory = TempData["category"];
             var loadAPIorCustom = TempData["apiOrCustom"];
-            
+
             //defaults to calling api questions if tempdata is lost
-            if(loadAPIorCustom == null)
+            if (loadAPIorCustom == null)
             {
                 loadAPIorCustom = "api";
             }
@@ -72,12 +72,18 @@ namespace Chore_Wars.Controllers
                 //1) find a way to randomize the question pulled from the Db
                 //int indexOffset = 1;
                 Random random = new Random();
-                int myRandom = random.Next(0, questions.Count);
-                ViewModelQuestions getQuestion = new ViewModelQuestions(questions[myRandom]);
-
-                //2) randomize the order of the answers
-                return View(getQuestion);
+                if (questions.Count <= 0)
+                {
+                    return View("ErrorPage");
+                }
+                else
+                {
+                    int myRandom = random.Next(0, questions.Count);
+                    ViewModelQuestions getQuestion = new ViewModelQuestions(questions[myRandom]);
+                    return View(getQuestion);
+                }
             }
+
             //need a way to ask "is this an API question, or a custom question"
             else
             {
@@ -228,7 +234,10 @@ namespace Chore_Wars.Controllers
             return View(foundQuestions);
         }
 
-        
+        public IActionResult ErrorPage()
+        {
+            return View();
+        }
 
         //build a method for customizing api calls
         //based on CATEGORY && DIFFICULTY
