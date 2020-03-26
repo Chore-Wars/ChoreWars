@@ -16,6 +16,12 @@
         font-weight: 900;
     }
 
+    #instructionsBody {
+        text-align: center;
+        color: darkblue;                       
+        
+    }
+
     #choosePlayer {
         text-align: center;
         color: gold;
@@ -35,14 +41,21 @@
     <div class="card">
         <div class="card-header" role="tab">
             <h5 class="mb-0">
-                <a class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    Instructions
+                <a class="collapsed col-md-3 offset-md-4" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    How to Play
                 </a>
             </h5>
         </div>
-        <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" style="">
-            <div class="card-body">
-                <p>words here</p>
+        <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" style="background-color: grey;">
+            <div class="card-body" id="instructionsBody">
+                <p>1) Register/Login</p>
+                <p>2) Add some Players</p>
+                <p>3) Add some Chores</p>
+                <p>4) Choose your Player</p>
+                <p>5) Answer questions to earn Points</p>
+                <p>6) Buy Chores in your player dashboard for your opponents!</p>
+                <br />
+                <p>Work smarter, not harder!</p>
             </div>
         </div>
     </div>

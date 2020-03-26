@@ -40,8 +40,8 @@ p    {color: gold;}
     <p>Question: @Model.CustomQuestion.Question1</p>
 
     <form action="../Question/Result" method="post">
-        <input id="1" type="submit" name="selection"class="btn btn-success" value="@shuffledAnswers[0]" /><br />
-        <input id="2" type="submit" name="selection" value="@shuffledAnswers[1]" /><br />
+        <input id="1" type="submit" name="selection" class="btn btn-success" value="@shuffledAnswers[0]" /><br />
+        <input id="2" type="submit" name="selection" class="btn btn-success" value="@shuffledAnswers[1]" /><br />
         <input id="3" type="submit" name="selection" class="btn btn-success" value="@shuffledAnswers[2]" /><br />
         <input id="4" type="submit" name="selection" class="btn btn-success" value="@shuffledAnswers[3]" /><br />
         <input type="hidden" name="answer" value="@Model.CustomQuestion.CorrectAnswer" />
