@@ -7,18 +7,25 @@
 
 @model ViewModelQuestions
 
-    <style>
-        body {
-            background-image: url(https://i.imgur.com/FPbs9yo.jpg);
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
-   body {background-color: powderblue;}
-h1   {color: gold;}
-p    {color: gold;}
+<style>
+    body {
+        background-image: url(https://i.imgur.com/FPbs9yo.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
 
-   
-    </style>
+    body {
+        background-color: powderblue;
+    }
+
+    h1 {
+        color: gold;
+    }
+
+    p {
+        color: gold;
+    }
+</style>
 
 @if (Model.ApiQuestion == null)
 {
@@ -31,58 +38,62 @@ p    {color: gold;}
 
     var shuffledAnswers = allAnswers.OrderBy(a => Guid.NewGuid()).ToList();
 
+    <div class="col-md-4 offset-4 text-center">
 
-    <h1>Question:</h1>
-    <p>Difficulty: @Model.CustomQuestion.Difficulty</p>
-    <p>Point Value: @Model.CustomQuestion.PointValue</p>
-    <p>Category: @Model.CustomQuestion.Category</p>
-    <br />
-    <p>Question: @Model.CustomQuestion.Question1</p>
+        <h1>Question:</h1>
+        <p>Difficulty: @Model.CustomQuestion.Difficulty</p>
+        <p>Point Value: @Model.CustomQuestion.PointValue</p>
+        <p>Category: @Model.CustomQuestion.Category</p>
+        <br />
+        <p>Question: @Model.CustomQuestion.Question1</p>
 
-    <form action="../Question/Result" method="post">
-        <input id="1" type="submit" name="selection"class="btn btn-success" value="@shuffledAnswers[0]" /><br />
-        <input id="2" type="submit" name="selection" value="@shuffledAnswers[1]" /><br />
-        <input id="3" type="submit" name="selection" class="btn btn-success" value="@shuffledAnswers[2]" /><br />
-        <input id="4" type="submit" name="selection" class="btn btn-success" value="@shuffledAnswers[3]" /><br />
-        <input type="hidden" name="answer" value="@Model.CustomQuestion.CorrectAnswer" />
-        <input type="hidden" name="points" value="@Model.CustomQuestion.PointValue" />
-    </form>
-
+        <form action="../Question/Result" method="post">
+            <input id="1" type="submit" name="selection" class="btn btn-primary" value="@shuffledAnswers[0]" /><br />
+            <input id="2" type="submit" name="selection" class="btn btn-primary" value="@shuffledAnswers[1]" /><br />
+            <input id="3" type="submit" name="selection" class="btn btn-primary" value="@shuffledAnswers[2]" /><br />
+            <input id="4" type="submit" name="selection" class="btn btn-primary" value="@shuffledAnswers[3]" /><br />
+            <input type="hidden" name="answer" value="@Model.CustomQuestion.CorrectAnswer" />
+            <input type="hidden" name="points" value="@Model.CustomQuestion.PointValue" />
+        </form>
+    </div>
 }
 else
 {
-    <p>Difficulty: @Model.ApiQuestion.results[0].difficulty</p>
-    <p>Point Value: @Model.ApiQuestion.results[0].point_value</p>
-    <p>Category: @Model.ApiQuestion.results[0].category</p>
-    <br />
-    <p>@Html.Raw(Model.ApiQuestion.results[0].question)</p>
+    <div class="col-md-4 offset-4 text-center">
 
-    <form action="../Question/Result" method="post">
-        <input id="1" type="submit" name="selection"class="btn btn-success" value="@Model.ApiQuestion.results[0].all_answers[0]" /><br />
+        <p>Difficulty: @Model.ApiQuestion.results[0].difficulty</p>
+        <p>Point Value: @Model.ApiQuestion.results[0].point_value</p>
+        <p>Category: @Model.ApiQuestion.results[0].category</p>
+        <br />
+        <p>@Html.Raw(Model.ApiQuestion.results[0].question)</p>
 
-        <input id="2" type="submit" name="selection" class="btn btn-success"value="@Model.ApiQuestion.results[0].all_answers[1]" /><br />
+        <form action="../Question/Result" method="post">
+            <input id="1" type="submit" name="selection" class="btn btn-primary" value="@Model.ApiQuestion.results[0].all_answers[0]" /><br /><br />
 
-        <input type="submit" name="selection"class="btn btn-success" value="@Model.ApiQuestion.results[0].all_answers[2]" /><br />
+            <input id="2" type="submit" name="selection" class="btn btn-primary" value="@Model.ApiQuestion.results[0].all_answers[1]" /><br /><br />
 
-        <input id="4" type="submit" name="selection" class="btn btn-success" value="@Model.ApiQuestion.results[0].all_answers[3]" /><br />
+            <input type="submit" name="selection" class="btn btn-primary" value="@Model.ApiQuestion.results[0].all_answers[2]" /><br /><br />
 
-        <input type="hidden" name="answer" value="@Model.ApiQuestion.results[0].correct_answer" />
-        <input type="hidden" name="points" value="@Model.ApiQuestion.results[0].point_value" />
-   
-    
-    
-    
-        @*<tr>
-            <td>@player.FirstName </td>
-            <td>@player.LastName</td>
-            <td>@player.CurrentPoints</td>
-            <td>@player.TotalPoints</td>
-            <td>@player.IncorrectAnswers</td>
-            <td><a href="../Household/LoginPlayer?id=@player.UserId" class="btn btn-primary">Log in as this user</a></td>
-            <td><a id="deleteButton " href="../Player/DeletePlayer?id=@player.UserId" class="btn btn-danger">Delete Player</a></td>
-        </tr>*@
-    
-    </form>
-}
+            <input id="4" type="submit" name="selection" class="btn btn-primary" value="@Model.ApiQuestion.results[0].all_answers[3]" /><br /><br />
+
+            <input type="hidden" name="answer" value="@Model.ApiQuestion.results[0].correct_answer" />
+            <input type="hidden" name="points" value="@Model.ApiQuestion.results[0].point_value" />
+
+
+
+
+            @*<tr>
+                    <td>@player.FirstName </td>
+                    <td>@player.LastName</td>
+                    <td>@player.CurrentPoints</td>
+                    <td>@player.TotalPoints</td>
+                    <td>@player.IncorrectAnswers</td>
+                    <td><a href="../Household/LoginPlayer?id=@player.UserId" class="btn btn-primary">Log in as this user</a></td>
+                    <td><a id="deleteButton " href="../Player/DeletePlayer?id=@player.UserId" class="btn btn-danger">Delete Player</a></td>
+                </tr>*@
+
+        </form>
+        </div>
+        }
 
 
