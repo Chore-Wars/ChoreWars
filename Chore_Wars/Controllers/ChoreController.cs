@@ -149,7 +149,7 @@ namespace Chore_Wars.Controllers
             var foundPlayer = _context.Player.Find(player.UserId);
 
             //subtract from players current points
-            if (foundPlayer.CurrentPoints > points)
+            if (foundPlayer.CurrentPoints >= points)
             {
                 foundPlayer.CurrentPoints = foundPlayer.CurrentPoints - points;
             }
